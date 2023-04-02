@@ -4,6 +4,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { BiUserCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import HomeButton from "~/components/HomeButton";
 
 const LoginPage = () => {
   const {
@@ -17,6 +18,7 @@ const LoginPage = () => {
   } = useContext<AuthProps>(AuthContext);
   return (
     <div className="flex justify-center items-center mt-20">
+      <HomeButton />
       <div className="flex flex-col gap-5">
         <div className="flex items-center justify-between w-80">
           <div className="flex items-center gap-2">
@@ -63,6 +65,7 @@ const LoginPage = () => {
           )}
         </div>
         <div>
+       
           Nếu đã có tài khoản.
           <Link to="/login">
             <b> Đăng nhập ngay</b>
