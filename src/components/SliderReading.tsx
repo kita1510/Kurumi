@@ -1,12 +1,12 @@
-import React from 'react'
-import Topic from './Topic'
+import React from "react";
+import Topic from "./Topic";
 
 const SliderReading = () => {
   return (
     <div>
-        <Topic></Topic>
+      <Topic></Topic>
     </div>
-  )
-}
+  );
+};
 
-export default SliderReading
+export default SliderReading;

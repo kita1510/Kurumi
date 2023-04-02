@@ -1,11 +1,7 @@
 import React, { ReactNode } from "react";
 
-const UserActive = ({children}: {children: ReactNode}) => {
-  return (
-    <div className="w-20 h-20 bg-green-500">
-      {children}
-    </div>
-  );
+const UserActive = () => {
+  return <div className="w-16 h-16 rounded-full bg-green-500"></div>;
 };
 
 export default UserActive;

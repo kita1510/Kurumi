@@ -19,12 +19,13 @@ const Navbar = () => (
       <RiCupLine size={30} />
       <BiMessageAltAdd size={30} />
     </div>
-    <img
-      className="w-14 h-14 rounded-full border-4 border-black"
-      src="https://i.pinimg.com/564x/7d/fe/5a/7dfe5a7570a2fadb319516e65153f4a2.jpg"
-      alt=""
-    />
-
+    <div className="w-12 h-12 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1 rounded-full flex justify-center items-center">
+      <img
+        className="w-10 h-10 rounded-full"
+        src="https://i.pinimg.com/564x/7d/fe/5a/7dfe5a7570a2fadb319516e65153f4a2.jpg"
+        alt=""
+      />
+    </div>
   </div>
 );
 

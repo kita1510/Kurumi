@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ScrollOnTop = () => {
-  return (
-    <div></div>
-  )
-}
+  return <div></div>;
+};
 
-export default ScrollOnTop
+export default ScrollOnTop;

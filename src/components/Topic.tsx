@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Topic = () => {
-  return (
-    <div className='w-[200px] h-[230px] bg-white'></div>
-  )
-}
+  return <div className="w-[180px] h-[200px] bg-green-300"></div>;
+};
 
-export default Topic
+export default Topic;

@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Topic from "./Topic";
 
 const PaginationPage = () => {
+  const [isActive, setIsActive] = useState(false);
   return (
-    <div>
-      <div className="flex gap-10">
+    <div className="flex justify-center gap-4 mt-5 flex-col w-[70%]">
+      <div className="flex gap-4">
         <Topic></Topic>
         <Topic></Topic>
         <Topic></Topic>
         <Topic></Topic>
       </div>
-      <div>
-        <button></button>
+      <div className="flex gap-3 justify-center">
+        <button className={`w-10 h-10 font-semibold text-white bg-red-500 rounded-xl`}>1</button>
+        <button className={`w-10 h-10 font-semibold text-white bg-red-500 rounded-xl`}>2</button>
+        <button className={`w-10 h-10 font-semibold text-white bg-red-500 rounded-xl`}>3</button>
+        <button className={`w-10 h-10 font-semibold text-white bg-red-500 rounded-xl`}>4</button>
       </div>
     </div>
   );
