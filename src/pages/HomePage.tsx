@@ -17,7 +17,7 @@ const HomePage = () => (
       <div className="mb-20">
         <SlideActive />
       </div>
-      <div className="w-full h-[400px] relative flex gap-10">
+      <div className="w-full h-[400px] relative flex gap-10 z-50">
         <MainSlider />
         <RandomTopic />
       </div>

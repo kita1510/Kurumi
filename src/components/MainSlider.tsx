@@ -56,40 +56,42 @@ export default function Example() {
 
   return (
     <>
-      <AnimatePresence initial={false} custom={direction}>
-        <motion.img
-          key={page}
-          className="w-[600px] h-[300px] object-cover object-center absolute"
-          src={images[imageIndex]}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-          }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = swipePower(offset.x, velocity.x);
+      <motion.div className="relative w-[600px] h-[350px]">
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.img
+            key={page}
+            className="w-[600px] h-[350px] object-cover object-center absolute"
+            src={images[imageIndex]}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
 
-            if (swipe < -swipeConfidenceThreshold) {
-              paginate(1);
-            } else if (swipe > swipeConfidenceThreshold) {
-              paginate(-1);
-            }
-          }}
-        />
-      </AnimatePresence>
-      <div className="next" onClick={() => paginate(1)}>
-        <GrFormNext />
-      </div>
-      <div className="prev" onClick={() => paginate(-1)}>
-        <GrFormPrevious />
-      </div>
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+          />
+        </AnimatePresence>
+        <div className="next right-3" onClick={() => paginate(1)}>
+          <GrFormNext />
+        </div>
+        <div className="prev left-3" onClick={() => paginate(-1)}>
+          <GrFormPrevious />
+        </div>
+      </motion.div>
     </>
   );
 }
