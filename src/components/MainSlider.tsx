@@ -83,7 +83,7 @@ export default function Example() {
                 paginate(-1);
               }
             }}
-          />
+          ></motion.img>
         </AnimatePresence>
         <div className="next right-3" onClick={() => paginate(1)}>
           <GrFormNext />

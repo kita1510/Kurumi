@@ -3,6 +3,8 @@ import Topic from "./Topic";
 
 const PaginationPage = () => {
   const [isActive, setIsActive] = useState(false);
+
+  
   return (
     <div className="flex justify-center gap-5 mt-5 flex-col w-[70%]">
       <div className="flex justify-between gap-5 flex-wrap">
