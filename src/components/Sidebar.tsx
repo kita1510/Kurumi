@@ -27,7 +27,7 @@ const Navbar = () => {
         <BiCabinet size={30} />
       </div>
       {user && (
-        <Link to={"/profile/" + user?.id}>
+        <Link to={"/profile/" + user?.name}>
           <div className="w-12 h-12 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1 rounded-full flex justify-center items-center">
             <img
               className="w-10 h-10 rounded-full"

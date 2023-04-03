@@ -3,6 +3,7 @@ import Sidebar from "~/components/Sidebar";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import useProfile from "~/hooks/useProfile";
 import { SlOptions } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 const ProfilePage = () => {
   const { user } = useContext<AuthProps>(AuthContext);
@@ -30,9 +31,11 @@ const ProfilePage = () => {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-7 mb-3">
               <div className="font-semibold text-2xl mr-3">{user?.name}</div>
-              <button className="px-5 py-2 rounded-lg font-semibold bg-slate-100">
-                Edit Profile
-              </button>
+              <Link to={`/profile/edit/${user?.id}`}>
+                <button className="px-5 py-2 rounded-lg font-semibold bg-slate-100">
+                  Edit Profile
+                </button>
+              </Link>
               <SlOptions />
             </div>
             <div className="flex items-center gap-9">

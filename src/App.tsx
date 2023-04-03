@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import ReadingPage from "./pages/ReadingPage";
 import Login from "./pages/Login";
 import ProfilePage from "./pages/ProfilePage";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile/:id" element={<ProfilePage />} />
+      <Route path="/profile/edit/:id" element={<EditProfile />} />
     </Routes>
   );
 }
