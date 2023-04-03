@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import Register from "./pages/Register";
 import ReadingPage from "./pages/ReadingPage";
 import Login from "./pages/Login";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/reading" element={<ReadingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/profile/:id" element={<ProfilePage />} />
     </Routes>
   );
 }

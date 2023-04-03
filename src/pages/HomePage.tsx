@@ -14,11 +14,12 @@ const HomePage = () => {
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
+
   return (
     <div className="flex justify-center">
       {!user ? (
         <Link to={"/register"}>
-          <button className="w-20 h-10 bg-red-600 hover:bg-red-800 fixed rounded-lg top-5 right-20 text-white font-[500]">
+          <button className="w-20 h-10 bg-red-600 hover:bg-red-700 fixed rounded-lg top-5 right-20 text-white font-[500]">
             Login
           </button>
         </Link>

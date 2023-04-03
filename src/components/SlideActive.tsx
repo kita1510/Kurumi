@@ -10,9 +10,7 @@ export default function App() {
   const ref = useRef(null);
   const { scrollXProgress } = useScroll({ container: ref });
   const users = useGetAllUsers();
-  const profiles = useProfiles()
-  // console.log(users)
-  console.log(profiles)
+  const profiles = useProfiles();
 
   return (
     <>
@@ -38,36 +36,13 @@ export default function App() {
             color="white"
           />
         </div>
-        <li>
-          <UserActive />
-        </li>
-        <li>
-          <UserActive />
-        </li>
-        <li>
-          <UserActive />
-        </li>
-        <li>
-          <UserActive />
-        </li>
-        <li>
-          <UserActive />
-        </li>
-        <li>
-          <UserActive />
-        </li>
-        <li>
-          <UserActive />
-        </li>
-        <li>
-          <UserActive />
-        </li>
-        <li>
-          <UserActive />
-        </li>
-        <li>
-          <UserActive />
-        </li>
+        {profiles?.data?.data?.map((p) => {
+          return (
+            <div>
+              <UserActive props={p} />
+            </div>
+          );
+        })}
         <div className="absolute flex items-center justify-center right-96 h-16 ">
           <GrFormNext className="bg-slate-400 rounded-full text-white" size={24} color="white" />
         </div>

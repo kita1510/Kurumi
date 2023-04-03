@@ -1,9 +1,11 @@
-import React, { ChangeEvent, createContext, ReactNode, useState } from "react";
+import React, { ChangeEvent, createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import client from "~/configs/client";
+import useLocalStorage from "~/hooks/useLocalStorage";
+import { AuthUser } from "~/types";
 
 export interface AuthProps {
-  user: {};
+  user: AuthUser;
   handleEnterUserName: (e: ChangeEvent<HTMLInputElement>) => void;
   handleEnterEmail: (e: ChangeEvent<HTMLInputElement>) => void;
   handleEnterPassword: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -17,7 +19,7 @@ export interface AuthProps {
 export const AuthContext = createContext<AuthProps>(null!);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useLocalStorage<AuthUser>("user", null!);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,10 +29,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
 
   async function handleLogin() {
+    setIsLoading(true);
     try {
-      const res = await client
-        .post("/api/auth/login", { email, password })
-        .then((res) => setUser(res.data));
+      const res = await client.post("/api/auth/login", { email, password }).then((res) => {
+        setUser(res.data);
+        localStorage.setItem("user", JSON.stringify(user));
+        setIsLoading(false);
+      });
       navigate("/");
     } catch (err) {}
   }
@@ -52,7 +57,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(true);
     try {
       await client.post("/api/auth/register", { name: userName, email, password });
-      console.log("Đăng kí tài khoản khoản thành công");
       setIsLoading(false);
       setIsSuccess(true);
       setUserName("");

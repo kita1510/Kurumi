@@ -44,7 +44,6 @@ const LoginPage = () => {
             <button
               className="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg outline-none mx-auto "
               onClick={handleLogin}
-              disabled={isLoading}
             >
               Log In
             </button>

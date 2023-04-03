@@ -6,7 +6,7 @@ const useGetAllUsers = () => {
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const data = await supabase.from("User").select("*");
+      const { data } = await supabase.from("User").select("*, Profiles(Avatar)");
       return data;
     },
   });
