@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { motion, AnimatePresence, wrap } from "framer-motion";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { useState } from 'react';
+import { motion, AnimatePresence, wrap } from 'framer-motion';
+import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
 const images = [
-  "https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg",
-  "https://wallpapers.com/images/featured/yv96zrvdnvfbt8nn.jpg",
-  "https://wallpaper.dog/large/10723194.jpg",
-  "https://wallpaper.dog/large/6651.png",
+  'https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg',
+  'https://wallpapers.com/images/featured/yv96zrvdnvfbt8nn.jpg',
+  'https://wallpaper.dog/large/10723194.jpg',
+  'https://wallpaper.dog/large/6651.png',
 ];
 
 const variants = {
@@ -68,7 +68,7 @@ export default function Example() {
             animate="center"
             exit="exit"
             transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
+              x: { type: 'spring', stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
             drag="x"

@@ -1,11 +1,10 @@
-import React from "react";
-import Reading from "./Reading";
+import React from 'react';
+import Reading from './Reading';
 
 const Container = () => {
   return (
     <div>
       <Reading></Reading>
-
     </div>
   );
 };

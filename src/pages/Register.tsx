@@ -5,6 +5,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { BiUserCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import HomeButton from "~/components/HomeButton";
+import ThreesDotLoader from "~/icons/ThreeDotsLoader";
 
 const LoginPage = () => {
   const {
@@ -53,7 +54,7 @@ const LoginPage = () => {
         </div>
         <div>
           {isLoading ? (
-            <div>Loading...</div>
+            <ThreesDotLoader loading={isLoading} />
           ) : (
             <button
               className="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg outline-none mx-auto "
@@ -65,7 +66,6 @@ const LoginPage = () => {
           )}
         </div>
         <div>
-       
           Nếu đã có tài khoản.
           <Link to="/login">
             <b> Đăng nhập ngay</b>

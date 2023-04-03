@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { AuthUser } from "~/types";
+import React, { ReactNode } from 'react';
+import { AuthUser } from '~/types';
 
 const UserActive = ({ props }) => {
   console.log(props?.Profile[0]);
@@ -10,7 +10,7 @@ const UserActive = ({ props }) => {
           className="w-[70px] h-[70px] border-4 rounded-full"
           src={
             props?.Profile[0]?.avatar ||
-            "https://i.pinimg.com/564x/84/f6/6d/84f66d61bf7e64ebb0a348e4e6f644e8.jpg"
+            'https://i.pinimg.com/564x/84/f6/6d/84f66d61bf7e64ebb0a348e4e6f644e8.jpg'
           }
           alt=""
         />

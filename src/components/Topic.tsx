@@ -1,6 +1,6 @@
-import React from "react";
-import { AiOutlineHeart } from "react-icons/ai";
-import { GrAddCircle } from "react-icons/gr";
+import React from 'react';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { GrAddCircle } from 'react-icons/gr';
 
 const Topic = () => {
   return (
@@ -17,7 +17,7 @@ const Topic = () => {
           <span className="font-semibold">0</span>
         </div>
         <div>
-          <GrAddCircle size={24}/>
+          <GrAddCircle size={24} />
         </div>
       </div>
     </div>

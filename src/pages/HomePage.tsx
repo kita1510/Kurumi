@@ -1,24 +1,24 @@
-import React, { useContext, useEffect } from "react";
-import Navbar from "~/components/Sidebar";
-import PaginationPage from "~/components/PaginationPage";
-import SlideActive from "~/components/SlideActive";
-import MainSlider from "~/components/MainSlider";
-import RandomTopic from "~/components/RandomTopic";
-import { Link } from "react-router-dom";
-import ScrollOnTop from "~/components/ScrollOnTop";
-import { AuthContext, AuthProps } from "~/contexts/AuthContext";
+import React, { useContext, useEffect } from 'react';
+import Navbar from '~/components/Sidebar';
+import PaginationPage from '~/components/PaginationPage';
+import SlideActive from '~/components/SlideActive';
+import MainSlider from '~/components/MainSlider';
+import RandomTopic from '~/components/RandomTopic';
+import { Link } from 'react-router-dom';
+import ScrollOnTop from '~/components/ScrollOnTop';
+import { AuthContext, AuthProps } from '~/contexts/AuthContext';
 
 const HomePage = () => {
   const { user, handleSignOut } = useContext<AuthProps>(AuthContext);
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
 
   return (
     <div className="flex justify-center">
       {!user ? (
-        <Link to={"/register"}>
+        <Link to={'/register'}>
           <button className="w-20 h-10 bg-red-600 hover:bg-red-700 fixed rounded-lg top-5 right-20 text-white font-[500]">
             Login
           </button>

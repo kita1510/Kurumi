@@ -4,6 +4,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import HomeButton from "~/components/HomeButton";
+import ThreesDotLoader from "~/icons/ThreeDotsLoader";
 
 const LoginPage = () => {
   const {
@@ -17,7 +18,7 @@ const LoginPage = () => {
   } = useContext<AuthProps>(AuthContext);
   return (
     <div className="flex justify-center items-center mt-20">
-      <HomeButton/>
+      <HomeButton />
       <div className="flex flex-col gap-5">
         <div className="flex items-center justify-between w-80">
           <div className="flex items-center gap-2">
@@ -39,7 +40,7 @@ const LoginPage = () => {
         </div>
         <div>
           {isLoading ? (
-            <div>Loading...</div>
+            <ThreesDotLoader loading={isLoading} />
           ) : (
             <button
               className="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg outline-none mx-auto "

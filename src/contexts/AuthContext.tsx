@@ -37,7 +37,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setIsLoading(false);
       });
       navigate("/");
-    } catch (err) {}
+    } catch (err) {
+      setIsLoading(false);
+    }
   }
 
   function handleEnterUserName(e: ChangeEvent<HTMLInputElement>) {

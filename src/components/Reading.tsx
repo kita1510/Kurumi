@@ -1,5 +1,5 @@
-import { motion, useScroll, useSpring } from "framer-motion";
-import { LoremIpsum } from "../components/LoremIpsum";
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { LoremIpsum } from '../components/LoremIpsum';
 
 export default function Reading() {
   const { scrollYProgress } = useScroll();

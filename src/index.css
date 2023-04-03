@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 body {
   --black: #000000;
@@ -71,10 +70,7 @@ footer {
   justify-content: flex-start;
   align-items: center;
   padding: 20px;
-  background-image: radial-gradient(
-    rgba(0, 0, 0, 0) 1px,
-    var(--background) 1px
-  );
+  background-image: radial-gradient(rgba(0, 0, 0, 0) 1px, var(--background) 1px);
   background-size: 4px 4px;
   backdrop-filter: blur(3px);
   font-size: 14px;
@@ -161,14 +157,14 @@ ul {
   -webkit-border-radius: 1ex;
 }
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--accent);
   -webkit-border-radius: 1ex;
 }
 
 ::-webkit-scrollbar-corner {
   background: #fff3;
-} 
+}
 
 li {
   flex: 0 0 50px;
@@ -179,7 +175,6 @@ li {
 li:last-of-type {
   margin: 0;
 }
-
 
 /* Main Slider */
 
@@ -210,7 +205,6 @@ li:last-of-type {
   z-index: 2;
 }
 
-
 .refresh {
   padding: 10px;
   position: absolute;
@@ -224,4 +218,39 @@ li:last-of-type {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+/* Input  */
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::-webkit-textfield-decoration-container{
+  visibility: hidden;
+}
+/* .custom-file-input::-webkit-textfield-decoration-container{
+  visibility: none;
+} */
+
+
+
+.custom-file-input::before {
+  content: "Change profile photo";
+  display: inline-block;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  background: white;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 600;
+  font-size: 16px;
+}
+.custom-file-input:hover {
+  color: red;
+}
+
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }

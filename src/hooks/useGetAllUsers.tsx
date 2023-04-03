@@ -1,12 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import supabase from "~/lib/supabase";
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import supabase from '~/lib/supabase';
 
 const useGetAllUsers = () => {
   const { data: users } = useQuery({
-    queryKey: ["users"],
+    queryKey: ['users'],
     queryFn: async () => {
-      const { data } = await supabase.from("User").select("*, Profiles(Avatar)");
+      const { data } = await supabase.from('User').select('*, Profiles(Avatar)');
       return data;
     },
   });
