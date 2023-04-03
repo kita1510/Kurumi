@@ -2,18 +2,16 @@ import React, { Fragment, useContext } from "react";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
-import { BiUserCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import HomePage from "./HomePage";
 import HomeButton from "~/components/HomeButton";
 
 const LoginPage = () => {
   const {
     user,
-    handleEnterUserName,
     handleEnterEmail,
     handleEnterPassword,
     handleRegister,
+    handleLogin,
     isLoading,
     isSuccess,
   } = useContext<AuthProps>(AuthContext);
@@ -44,11 +42,11 @@ const LoginPage = () => {
             <div>Loading...</div>
           ) : (
             <button
-              className="w-20 h-10 bg-red-500 text-white font-semibold rounded-lg outline-none mx-auto "
-              onClick={handleRegister}
+              className="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg outline-none mx-auto "
+              onClick={handleLogin}
               disabled={isLoading}
             >
-              Login
+              Log In
             </button>
           )}
         </div>
@@ -58,11 +56,11 @@ const LoginPage = () => {
             <b> Đăng kí ngay</b>
           </Link>
         </div>
-        {/* {isSuccess ? (
-          <div className="mt-5 font-semibold">Đăng kí tài khoản thành công</div>
+        {isSuccess ? (
+          <div className="mt-2 font-semibold">Đăng kí tài khoản thành công. Vui lòng đăng nhập</div>
         ) : (
           <div></div>
-        )} */}
+        )}
       </div>
     </div>
   );

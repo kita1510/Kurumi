@@ -56,7 +56,7 @@ const LoginPage = () => {
             <div>Loading...</div>
           ) : (
             <button
-              className="w-20 h-10 bg-red-500 text-white font-semibold rounded-lg outline-none mx-auto "
+              className="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg outline-none mx-auto "
               onClick={handleRegister}
               disabled={isLoading}
             >

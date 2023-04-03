@@ -8,6 +8,8 @@ export interface AuthProps {
   handleEnterEmail: (e: ChangeEvent<HTMLInputElement>) => void;
   handleEnterPassword: (e: ChangeEvent<HTMLInputElement>) => void;
   handleRegister: () => void;
+  handleLogin: () => void;
+  handleSignOut: () => void;
   isLoading: boolean;
   isSuccess: boolean;
 }
@@ -22,9 +24,16 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  function handleLogin(e: ChangeEvent<HTMLInputElement>) {}
+  async function handleLogin() {
+    try {
+      const res = await client
+        .post("/api/auth/login", { email, password })
+        .then((res) => setUser(res.data));
+      navigate("/");
+    } catch (err) {}
+  }
 
   function handleEnterUserName(e: ChangeEvent<HTMLInputElement>) {
     setUserName(e.target.value);
@@ -49,12 +58,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUserName("");
       setEmail("");
       setPassword("");
+      navigate("/login");
     } catch (err) {
       console.log(err);
       setIsLoading(false);
       setIsSuccess(false);
       setIsError(true);
     }
+  }
+
+  async function handleSignOut() {
+    setUser("");
+    localStorage.setItem("user", "");
   }
 
   return (
@@ -65,6 +80,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         handleEnterEmail,
         handleEnterPassword,
         handleRegister,
+        handleLogin,
+        handleSignOut,
         isLoading,
         isSuccess,
       }}
