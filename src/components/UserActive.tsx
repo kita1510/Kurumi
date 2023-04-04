@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import { AuthUser } from '~/types';
+import React from 'react';
 
 const UserActive = ({ props }) => {
-  console.log(props?.Profile[0]);
+
+  console.log(props?.Profile[0])
   return (
     <div className="flex flex-col gap-1">
       <div className="w-20 h-20 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500  flex  justify-center items-center">

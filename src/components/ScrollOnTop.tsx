@@ -27,7 +27,7 @@ const ScrollOnTop = memo(() => {
           className="fixed bottom-4 cursor-pointer right-4 px-4 py-2 bg-green-600 text-white rounded-lg flex justify-center items-center gap-2"
           onClick={handleMoveToTop}
         >
-          <div className="font-semibold">Scrool On Top</div>
+          {/* <div className="font-semibold">Scrool On Top</div> */}
           <CgArrowUpO size={30} color="white" />
         </div>
       )}

@@ -16,6 +16,7 @@ const EditProfile = () => {
   const [avatarUrl, setAvatarUrl] = useState("");
   const [avatar, setAvatar] = useState("");
   const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (avatarUrl) {
@@ -27,29 +28,48 @@ const EditProfile = () => {
     setBio(e.target.value);
   }
 
-  async function upLoadAvatar() {
-    const { data, error } = await supabase.storage.from("avatars/avatar").download(avatarUrl);
-    if (data) {
-      const url = URL.createObjectURL(data);
-      setAvatar(url);
-    }
-    if (profile?.avatar) {
-      await client({
-        method: "PUT",
-        url: `/api/profiles/${profile?.id}`,
-        headers: { Authorization: "Bearer " + user?.accessToken },
-        data: { avatar },
-      });
-      setMessage("Cập nhật ảnh đại diện thành công!");
-    } else {
-      await client({
-        method: "POST",
-        url: `/api/profiles/`,
-        headers: { Authorization: "Bearer " + user?.accessToken },
-        data: { avatar, userId: user?.id },
-      });
+  console.log(isSuccess);
 
-      setMessage("Cập nhật ảnh đại diện thành công!");
+  async function upLoadAvatar() {
+    if (isSuccess) {
+      const { data, error } = await supabase.storage.from("avatars/avatar").download(avatarUrl);
+      console.log(data);
+      if (data) {
+        const url = URL.createObjectURL(data);
+        setAvatar(url);
+        try {
+          setIsloading(true);
+          if (profile != null) {
+            const res = await client({
+              method: "PUT",
+              url: `/api/profiles/${profile?.id}`,
+              headers: { Authorization: "Bearer " + user?.accessToken },
+              data: { avatar },
+            });
+            if (res) {
+              setIsloading(false);
+              setMessage("Cập nhật ảnh đại diện thành công!");
+              console.log(profile);
+            }
+          }
+          if (profile == null) {
+            const response = await client({
+              method: "POST",
+              url: `/api/profiles/`,
+              headers: { Authorization: "Bearer " + user?.accessToken },
+              data: { avatar, userId: user?.id },
+            });
+            if (response) {
+              setIsloading(false);
+              setMessage("Cập nhật ảnh đại diện thành công!");
+              console.log(profile);
+            }
+          }
+        } catch (err) {
+          setIsloading(false);
+          console.log(err);
+        }
+      }
     }
   }
 
@@ -61,33 +81,50 @@ const EditProfile = () => {
       const filePath = `${file?.name}`;
       const typeOfFile = filePath.split(".")[1];
       const fileUp = `${uuidv4()}.${typeOfFile}`;
-      console.log(fileUp);
-      setAvatarUrl(filePath);
-      await supabase.storage.from("avatars/avatar").upload(fileUp, file, { upsert: true });
+      setAvatarUrl(fileUp);
+      const { data } = await supabase.storage
+        .from("avatars/avatar")
+        .upload(fileUp, file, { upsert: true });
+      // console.log(data)
+      if (data) {
+        setIsSuccess(true);
+      } else {
+        setIsSuccess(false);
+      }
     }
   }
+
+  // console.log(avatar);
+  // console.log(avatarUrl);
 
   async function updateBio(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     if (bio) {
       setIsloading(true);
       try {
-        if (profile?.bio) {
-          await client({
+        if (profile != null) {
+          const res = await client({
             method: "PUT",
             url: `/api/profiles/${profile?.id}`,
             headers: { Authorization: "Bearer " + user?.accessToken },
             data: { bio },
           });
-          setMessage("Update bio thành công!");
-        } else {
-          await client({
+          if (res) {
+            setMessage("Update bio thành công!");
+            console.log(profile);
+          }
+        }
+        if (profile == null) {
+          const res = await client({
             method: "POST",
             url: `/api/profiles/`,
             headers: { Authorization: "Bearer " + user?.accessToken },
             data: { bio, userId: user?.id },
           });
-          setMessage("Update bio thành công!");
+          if (res) {
+            setMessage("Update bio thành công!");
+          }
+          console.log(profile);
         }
         setBio("");
         setIsloading(false);
@@ -110,7 +147,7 @@ const EditProfile = () => {
         <div className=" flex w-[80%] h-[80%] justify-center">
           <div className="flex w-[460px] h-28 flex-col justify-between gap-5 items-center">
             <div className="flex w-full items-center flex-row gap-5">
-              <img className="w-12 h-12 rounded-full" src={profile?.avatar} alt="" />
+              <img className="w-12 h-12 rounded-full object-cover" src={profile?.avatar} alt="" />
               <div>
                 <div className="font-semibold">{user?.name}</div>
                 <div className="font-semibold text-green-600 cursor-pointer">

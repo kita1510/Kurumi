@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import Sidebar from '~/components/Sidebar';
-import { AuthContext, AuthProps } from '~/contexts/AuthContext';
-import useProfile from '~/hooks/useProfile';
-import { SlOptions } from 'react-icons/sl';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import Sidebar from "~/components/Sidebar";
+import { AuthContext, AuthProps } from "~/contexts/AuthContext";
+import useProfile from "~/hooks/useProfile";
+import { SlOptions } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 const ProfilePage = () => {
   const { user } = useContext<AuthProps>(AuthContext);
@@ -19,10 +19,10 @@ const ProfilePage = () => {
         <div className="w-[80%] mt-10 ml-32 h-[200px] flex flex-row border-b-2">
           <div className=" h-20 w-[20%] rounded-full mx-20 ">
             <img
-              className="w-32 h-32 rounded-full"
+              className="w-32 h-32 rounded-full object-cover"
               src={
                 profile?.avatar ||
-                'https://i.pinimg.com/564x/b2/2f/1a/b22f1abede127b219aeb4db09e06cef7.jpg'
+                "https://i.pinimg.com/564x/b2/2f/1a/b22f1abede127b219aeb4db09e06cef7.jpg"
               }
               alt=""
             />
