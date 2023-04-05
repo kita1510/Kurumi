@@ -9,12 +9,12 @@ import { v4 as uuidv4 } from "uuid";
 
 const EditProfile = () => {
   const { user } = useContext<AuthProps>(AuthContext);
-  const [bio, setBio] = useState<string>("");
   const profile = useProfile();
+  const [bio, setBio] = useState<string>(profile?.bio);
   const [isLoading, setIsloading] = useState(false);
   const [error, setError] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState(profile?.avatar);
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -28,7 +28,7 @@ const EditProfile = () => {
     setBio(e.target.value);
   }
 
-  console.log(isSuccess);
+  // console.log(isSuccess);
 
   async function upLoadAvatar() {
     if (isSuccess) {
@@ -78,7 +78,7 @@ const EditProfile = () => {
       setError("Chọn file ảnh cần upload");
     } else {
       const file = e.target.files[0];
-      const filePath = `${file?.name}`;
+      const filePath = `${file?.name}`.trim();
       const typeOfFile = filePath.split(".")[1];
       const fileUp = `${uuidv4()}.${typeOfFile}`;
       setAvatarUrl(fileUp);

@@ -26,7 +26,7 @@ const Sidebar = () => {
         {navigations.map((n) => {
           return (
             <ToolTipComponent content={n.content} key={n.id}>
-              <Link to={n.link}>
+              <Link to={{ pathname: n.link }}>
                 <button className="w-14 h-14 hover:bg-slate-100 rounded-full flex justify-center items-center">
                   {n.component}
                 </button>
