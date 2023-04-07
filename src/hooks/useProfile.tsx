@@ -2,8 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext, AuthProps } from '~/contexts/AuthContext';
 import supabase from '~/lib/supabase';
-import { Profile } from '~/types';
-import { PostgrestBuilder, PostgrestFilterBuilder } from '@supabase/postgrest-js';
 
 const useProfile = () => {
   const { user } = useContext<AuthProps>(AuthContext);

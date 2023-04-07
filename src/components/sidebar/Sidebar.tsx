@@ -6,7 +6,7 @@ import { BiSearchAlt, BiBookOpen, BiMessageAltAdd, BiCabinet } from "react-icons
 import { Link } from "react-router-dom";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import useProfile from "~/hooks/useProfile";
-import ToolTipComponent from "./ToolTip";
+import ToolTipComponent from "../shared/ToolTip";
 
 const Sidebar = () => {
   const { user } = useContext<AuthProps>(AuthContext);
@@ -25,7 +25,7 @@ const Sidebar = () => {
       <div className="mt-20 flex flex-col gap-1">
         {navigations.map((n) => {
           return (
-            <ToolTipComponent content={n.content} key={n.id}>
+            <ToolTipComponent content={n.content} placement={"right"} key={n.id}>
               <Link to={{ pathname: n.link }}>
                 <button className="w-14 h-14 hover:bg-slate-100 rounded-full flex justify-center items-center">
                   {n.component}

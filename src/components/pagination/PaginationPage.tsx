@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Topic from './Topic';
+import React, { useState } from "react";
+import Topic from "../shared/Topic";
 
 const PaginationPage = () => {
   const [isActive, setIsActive] = useState(false);

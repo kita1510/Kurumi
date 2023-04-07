@@ -1,7 +1,7 @@
 // import "./styles.css";
 import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
-import UserActive from "./UserActive";
+import UserActive from "../shared/UserActive";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import useGetAllUsers from "~/hooks/useGetAllUsers";
 import useProfiles from "~/hooks/useProfiles";
@@ -38,7 +38,6 @@ export default function App() {
           />
         </div>
         {profiles?.data?.data?.map((p) => {
-          console.log(p)
           return (
             <div key={p?.id}>
               <UserActive props={p} />

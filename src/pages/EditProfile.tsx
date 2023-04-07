@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react";
-import SideBar from "~/components/Sidebar";
+import SideBar from "~/components/sidebar/Sidebar";
 import client from "~/configs/client";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import useProfile from "~/hooks/useProfile";

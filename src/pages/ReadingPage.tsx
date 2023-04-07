@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Container from "~/components/Container";
-import Sidebar from "~/components/Sidebar";
+import Sidebar from "~/components/sidebar/Sidebar";
 
 const ReadingPage = () => {
   const handleMoveToTop = () => {

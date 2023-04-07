@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import client from "~/configs/client";
 import supabase from "~/lib/supabase";
-import { UserProfile } from "~/components/UserActive";
+import { UserProfile } from "~/components/shared/UserActive";
 
 const useProfiles = () => {
   const profiles = useQuery<UserProfile[]>({

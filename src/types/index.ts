@@ -13,3 +13,8 @@ export interface Profile {
   avatar: string;
   follower: number;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+}

@@ -1,13 +1,13 @@
-import React from 'react';
-import { Route } from 'react-router';
-import { Routes } from 'react-router-dom';
-import Navbar from './components/Sidebar';
-import HomePage from './pages/HomePage';
-import Register from './pages/Register';
-import ReadingPage from './pages/ReadingPage';
-import Login from './pages/Login';
-import ProfilePage from './pages/ProfilePage';
-import EditProfile from './pages/EditProfile';
+import React from "react";
+import { Route } from "react-router";
+import { Routes } from "react-router-dom";
+import Navbar from "./components/sidebar/Sidebar";
+import HomePage from "./pages/HomePage";
+import Register from "./pages/Register";
+import ReadingPage from "./pages/ReadingPage";
+import Login from "./pages/Login";
+import ProfilePage from "./pages/ProfilePage";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Sidebar from "~/components/Sidebar";
+import Sidebar from "~/components/sidebar/Sidebar";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import useProfile from "~/hooks/useProfile";
 import { SlOptions } from "react-icons/sl";
