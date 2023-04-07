@@ -8,13 +8,14 @@ import ReadingPage from "./pages/ReadingPage";
 import Login from "./pages/Login";
 import ProfilePage from "./pages/ProfilePage";
 import EditProfile from "./pages/EditProfile";
+import ListPage from "./pages/ListPage";
 
 function App() {
   return (
     <Routes>
       {/* <Navbar /> */}
       <Route path="/" element={<HomePage />} />
-      <Route path="/reading" element={<ReadingPage />} />
+      <Route path="/reading" element={<ListPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile/:id" element={<ProfilePage />} />

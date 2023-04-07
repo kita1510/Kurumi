@@ -36,19 +36,19 @@ const HomePage = () => {
           Log Out
         </button>
       )}
-      <div className="fixed left-0">
+      <div className="fixed left-0 z-50">
         <Sidebar />
       </div>
       <div className="w-[70%] ">
         <div className="mb-10">
           <SlideActive />
         </div>
-        <div className="w-full h-[400px] relative flex gap-10 z-50">
+        <div className="w-full h-[400px] relative flex flex-row gap-10 z-40">
           <MainSlider />
-          <div className="">
             <RandomTopic />
-            <Category />
-          </div>
+            <div className="absolute right-0 top-52">
+              <Category />
+            </div>
         </div>
         <div className="">
           <PaginationPage />

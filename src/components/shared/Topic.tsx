@@ -1,10 +1,10 @@
-import React from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { GrAddCircle } from 'react-icons/gr';
+import React from "react";
+import { AiOutlineHeart } from "react-icons/ai";
+import { GrAddCircle } from "react-icons/gr";
 
 const Topic = () => {
   return (
-    <div className="w-[135px] h-[250px]  gap-2 relative rounded-sm flex flex-col">
+    <div className="w-[135px] h-[250px]  gap-2 relative rounded-sm flex flex-col cursor-pointer">
       <img
         className="w-full h-[180px] object-cover"
         src="https://i.pinimg.com/564x/92/82/81/9282810f23aece93a266167779750326.jpg"
