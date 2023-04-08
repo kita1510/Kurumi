@@ -1,5 +1,4 @@
 import { motion, useScroll, useSpring } from "framer-motion";
-import { LoremIpsum } from "../LoremIpsum";
 
 export default function Reading() {
   const { scrollYProgress } = useScroll();
@@ -15,7 +14,84 @@ export default function Reading() {
       <h1>
         <code>useScroll</code> with spring smoothing
       </h1>
-      <LoremIpsum />
     </>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

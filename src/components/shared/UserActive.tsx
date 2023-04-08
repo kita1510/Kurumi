@@ -17,7 +17,7 @@ const UserActive = ({ props }: { props: UserInfo }) => {
             alt=""
           />
         </div>
-        <div className="mx-auto">{props?.name}</div>
+        <div className="mx-auto flex justify-center font-semibold mt-2">{props?.name}</div>
       </Link>
     </div>
   );

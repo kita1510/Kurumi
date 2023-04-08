@@ -44,7 +44,7 @@ const HomePage = () => {
           <SlideActive />
         </div>
         <div className="w-full h-[400px] relative flex flex-row gap-10 z-40">
-          {/* <MainSlider /> */}
+          <MainSlider />
           <RandomTopic />
           <div className="absolute right-0 top-52">
             <Category />

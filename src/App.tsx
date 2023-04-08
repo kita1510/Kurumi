@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router";
 import { Routes } from "react-router-dom";
-import Navbar from "./components/sidebar/Sidebar";
 import HomePage from "./pages/HomePage";
 import Register from "./pages/Register";
 import ReadingPage from "./pages/ReadingPage";
@@ -24,6 +23,7 @@ function App() {
       <Route path="/profile/:id" element={<ProfilePage />} />
       <Route path="/profile/edit/:id" element={<EditProfile />} />
       <Route path="/topic/:title" element={<DetailTopic />} />
+      <Route path="/read/:title" element={<ReadingPage />} />
     </Routes>
   );
 }

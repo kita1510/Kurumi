@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-
 import { GrHomeOption } from "react-icons/gr";
 import { RiCupLine, RiMessage3Line } from "react-icons/ri";
 import { BiSearchAlt, BiBookOpen, BiMessageAltAdd, BiCabinet } from "react-icons/bi";
@@ -24,7 +23,6 @@ const Sidebar = () => {
       id: 4,
       content: "Search",
       component: <BiSearchAlt size={30} />,
-      link: "/",
       handleClick: () => setIsTab(!isTab),
     },
     { id: 5, content: "Ranking", component: <RiCupLine size={30} />, link: "/reading" },
@@ -32,7 +30,7 @@ const Sidebar = () => {
     { id: 7, content: "Library", component: <BiCabinet size={30} />, link: "/reading" },
   ];
   return (
-    <div className="flex z-[9999]">
+    <div className="flex z-[9]">
       <div className="px-5 border-r-2 h-[900px] border-black flex flex-col items-center gap-6 fixed top-0 left-0">
         <div className="mt-20 flex flex-col gap-1">
           {navigations.map((n) => {
@@ -65,7 +63,9 @@ const Sidebar = () => {
           </Link>
         )}
       </div>
-      <div>{isTab ? <SearchTab></SearchTab> : <React.Fragment></React.Fragment>}</div>
+      <div className="z-[100]">
+        {isTab ? <SearchTab></SearchTab> : <React.Fragment></React.Fragment>}
+      </div>
     </div>
   );
 };

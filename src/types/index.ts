@@ -61,3 +61,9 @@ enum ROLE {
   USER = "USER",
   ADMIN = "ADMIN",
 }
+
+export type CategoriesOnPosts = {
+  postId: number
+  categoryId: number
+}
+
