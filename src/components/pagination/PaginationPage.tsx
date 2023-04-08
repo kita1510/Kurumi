@@ -1,20 +1,20 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import usePosts from "~/hooks/usePosts";
 import Topic from "../shared/Topic";
 
 const PaginationPage = () => {
   const [isActive, setIsActive] = useState(false);
+  const posts = usePosts();
 
   return (
-    <div className="flex justify-center gap-5 mt-5 flex-col w-[70%]">
-      <div className="flex justify-between gap-5 flex-wrap">
-        <Topic />
-        <Topic />
-        <Topic />
-        <Topic />
-        <Topic />
-        <Topic />
-        <Topic />
-        <Topic />
+    <div className="flex justify-center gap-10 mt-5 flex-col w-[70%]">
+      <div className="flex gap-10 flex-wrap">
+        {posts?.map((p) => (
+          <Link to={{ pathname: `/topic/${p?.title}` }}>
+            <Topic key={p?.id} coverPage={p?.coverPage} title={p?.title} />
+          </Link>
+        ))}
       </div>
       <div className="flex gap-3 justify-center">
         <button className={`w-10 h-10 font-semibold text-white bg-red-500 rounded-xl`}>1</button>

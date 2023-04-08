@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import ProfilePage from "./pages/ProfilePage";
 import EditProfile from "./pages/EditProfile";
 import ListPage from "./pages/ListPage";
+import CategoryPage from "./pages/CategoryPage";
+import DetailTopic from "./pages/DetailTopic";
 
 function App() {
   return (
@@ -16,10 +18,12 @@ function App() {
       {/* <Navbar /> */}
       <Route path="/" element={<HomePage />} />
       <Route path="/reading" element={<ListPage />} />
+      <Route path="/category/:name" element={<CategoryPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile/:id" element={<ProfilePage />} />
       <Route path="/profile/edit/:id" element={<EditProfile />} />
+      <Route path="/topic/:title" element={<DetailTopic />} />
     </Routes>
   );
 }

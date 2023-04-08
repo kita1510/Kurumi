@@ -14,8 +14,8 @@ export function LoremIpsum() {
           In eget sodales arcu, consectetur efficitur metus. Duis efficitur tincidunt odio, sit amet
           laoreet massa fringilla eu.
         </p>
-        <p>n
-          Pellentesque id lacus pulvinar elit pulvinar pretium ac non urna. Mauris id mauris vel
+        <p>
+          n Pellentesque id lacus pulvinar elit pulvinar pretium ac non urna. Mauris id mauris vel
           arcu commodo venenatis. Aliquam eu risus arcu. Proin sit amet lacus mollis, semper massa
           ut, rutrum mi.
         </p>

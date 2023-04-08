@@ -3,15 +3,13 @@ import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import UserActive from "../shared/UserActive";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import useGetAllUsers from "~/hooks/useGetAllUsers";
-import useProfiles from "~/hooks/useProfiles";
-import { Profile } from "~/types";
+import useGetAllUsers from "~/hooks/useUsers";
 
 export default function App() {
   const ref = useRef(null);
   const { scrollXProgress } = useScroll({ container: ref });
   const users = useGetAllUsers();
-  const profiles = useProfiles();
+  console.log(users);
 
   return (
     <>
@@ -37,7 +35,7 @@ export default function App() {
             color="white"
           />
         </div>
-        {profiles?.data?.data?.map((p) => {
+        {users?.map((p) => {
           return (
             <div key={p?.id}>
               <UserActive props={p} />

@@ -1,5 +1,4 @@
 import { Tooltip, TooltipProps } from "@material-tailwind/react";
-import {} from "@material-tailwind/react";
 
 const App = ({ children, content, placement, className }: TooltipProps) => {
   return (
@@ -12,7 +11,7 @@ const App = ({ children, content, placement, className }: TooltipProps) => {
       before:border-r-[10px] before:border-r-black before:border-b-[10px] before:border-b-transparent ${className}`}
       animate={{
         mount: { scale: 1, y: 0 },
-        unmount: { scale: 0, y: 25 },
+        unmount: { scale: 0, y: 0 },
       }}
     >
       {children}

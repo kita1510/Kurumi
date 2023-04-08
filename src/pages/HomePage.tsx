@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Sidebar from "~/components/sidebar/Sidebar";
 import PaginationPage from "~/components/pagination/PaginationPage";
-import SlideActive from "~/components/sliders/SlideActive";
+import SlideActive from "~/components/sliders/SlideUserActive";
 import MainSlider from "~/components/sliders/MainSlider";
 import RandomTopic from "~/components/RandomTopic";
 import { Link } from "react-router-dom";
@@ -44,11 +44,11 @@ const HomePage = () => {
           <SlideActive />
         </div>
         <div className="w-full h-[400px] relative flex flex-row gap-10 z-40">
-          <MainSlider />
-            <RandomTopic />
-            <div className="absolute right-0 top-52">
-              <Category />
-            </div>
+          {/* <MainSlider /> */}
+          <RandomTopic />
+          <div className="absolute right-0 top-52">
+            <Category />
+          </div>
         </div>
         <div className="">
           <PaginationPage />
