@@ -94,7 +94,7 @@ const EditProfile = () => {
     }
   }
 
-  // console.log(avatar);
+  // console.log(avatar)
   // console.log(avatarUrl);
 
   async function updateBio(e: ChangeEvent<HTMLFormElement>) {

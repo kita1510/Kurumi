@@ -4,6 +4,7 @@ import { AiFillRead } from "react-icons/ai";
 import { HiHome } from "react-icons/hi";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Sidebar from "~/components/sidebar/Sidebar";
+import usePosts from "~/hooks/usePosts";
 import { randomBgColor } from "~/utils/listColor";
 
 const DetailTopic = () => {
@@ -12,7 +13,9 @@ const DetailTopic = () => {
   const { title } = useParams();
   console.log(data.state);
 
-  console.log(title);
+  const posts = usePosts()
+  console.log(posts)
+  // console.log(title);
 
   return (
     <div className="flex w-full">
