@@ -9,6 +9,8 @@ import ScrollOnTop from '~/components/shared/ScrollOnTop';
 import { AuthContext, AuthProps } from '~/contexts/AuthContext';
 import Notification from '~/components/shared/Notification';
 import Category from '~/components/Category';
+import { useQuery } from '@tanstack/react-query';
+import supabase from '~/lib/supabase';
 
 const HomePage = () => {
   const { user, handleSignOut } = useContext<AuthProps>(AuthContext);
@@ -16,6 +18,11 @@ const HomePage = () => {
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
+
+
+
+
+  // console.log(categories);
 
   return (
     <div className="flex justify-center">
@@ -39,7 +46,7 @@ const HomePage = () => {
       <div className="fixed left-0 z-50">
         <Sidebar />
       </div>
-      <div className="w-[70%] ">
+      <div className="w-9/12 ">
         <div className="mb-10">
           <SlideActive />
         </div>

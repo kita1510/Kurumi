@@ -1,10 +1,13 @@
 import { Button } from "@material-tailwind/react";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { AiFillRead } from "react-icons/ai";
 import { HiHome } from "react-icons/hi";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Sidebar from "~/components/sidebar/Sidebar";
+import usePost from "~/hooks/usePost";
 import usePosts from "~/hooks/usePosts";
+import supabase from "~/lib/supabase";
 import { randomBgColor } from "~/utils/listColor";
 
 const DetailTopic = () => {
@@ -13,9 +16,8 @@ const DetailTopic = () => {
   const { title } = useParams();
   console.log(data.state);
 
-  const posts = usePosts()
-  console.log(posts)
-  // console.log(title);
+  const post = usePost(title);
+  console.log(post);
 
   return (
     <div className="flex w-full">
@@ -63,9 +65,13 @@ const DetailTopic = () => {
                 <div className="flex gap-10 justify-between">
                   <div className="font-semibold text-base text-white flex gap-1 items-center">
                     Thể loại:
-                    <button className={`py-1 ml-2 rounded-lg px-2 ${randomBgColor()} `}>
-                      {data.state?.category.name}
-                    </button>
+                    {post?.Category?.map((p) => (
+                      <Link to={`/category/${p?.name}`}>
+                        <button className={`py-1 ml-2 font-semibold rounded-lg px-2 ${randomBgColor()} `}>
+                          {p?.name}
+                        </button>
+                      </Link>
+                    ))}
                   </div>
                   {/* <div className="font-semibold text-base text-white">Lượt thích</div>
                   <div className="font-semibold text-base text-white">
