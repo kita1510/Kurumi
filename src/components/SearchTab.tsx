@@ -1,8 +1,20 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { ChangeEvent, useContext, useRef, useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import SearchItem from "./sliders/SearchItem";
 
 const SearchTab = () => {
+  const [result, setResult] = useState("");
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setResult(e.target.value);
+  };
+  const searchRef = useRef<HTMLInputElement>();
+  const handleDelete = () => {
+    setResult("");
+    searchRef.current?.focus();
+  };
+
+  console.log(result);
   return (
     <div className="w-[480px] h-[800px] z-[99999] fixed ml-[100px] rounded-br-3xl rounded-tr-3xl border-r-2 bg-white">
       <div className="w-full h-1/4 border-b-2 border-b-black">
@@ -12,12 +24,18 @@ const SearchTab = () => {
             className="w-full h-full px-5 text-lg font-semibold outline-none rounded-xl bg-slate-100"
             type="text"
             placeholder="Search"
+            value={result}
+            onChange={handleChange}
+            ref={searchRef}
           />
           <div>
-            <IoMdCloseCircle
-              className="absolute top-1/2 right-5 bottom-1/2 my-auto"
-              size={30}
-            ></IoMdCloseCircle>
+            {result && (
+              <IoMdCloseCircle
+                className="absolute top-1/2 right-5 bottom-1/2 my-auto"
+                size={30}
+                onClick={handleDelete}
+              ></IoMdCloseCircle>
+            )}
           </div>
         </div>
       </div>

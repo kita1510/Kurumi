@@ -1,23 +1,7 @@
-import React, { useEffect, useState, memo } from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
-import client from "~/configs/client";
-import { Category } from "~/types";
-import { randomBgColor } from "~/utils/listColor";
 
 const App = memo(() => {
-  const [cateName, setCateName] = useState<Category[]>([]);
-
-  console.log(randomBgColor());
-
-  async function getCateList() {
-    const data = await client.get("/api/categories");
-    setCateName(data?.data);
-  }
-
-  useEffect(() => {
-    getCateList();
-  }, []);
-
   const categoryList = [
     { cate: "Harem", bgColor: "bg-red-500", bgHoverColor: "hover:bg-red-800" },
     { cate: "Slice of life", bgColor: "bg-blue-500", bgHoverColor: "hover:bg-blue-800" },
@@ -28,8 +12,6 @@ const App = memo(() => {
     { cate: "Adventure", bgColor: "bg-green-500", bgHoverColor: "hover:bg-green-800" },
     { cate: "Music", bgColor: "bg-pink-500", bgHoverColor: "hover:bg-pink-800" },
   ];
-
-  console.log(cateName);
 
   return (
     <div className="flex gap-3 flex-wrap w-60">

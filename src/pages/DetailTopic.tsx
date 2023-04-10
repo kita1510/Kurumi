@@ -1,13 +1,9 @@
-import { Button } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { AiFillRead } from "react-icons/ai";
 import { HiHome } from "react-icons/hi";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Sidebar from "~/components/sidebar/Sidebar";
 import usePost from "~/hooks/usePost";
-import usePosts from "~/hooks/usePosts";
-import supabase from "~/lib/supabase";
 import { randomBgColor } from "~/utils/listColor";
 
 const DetailTopic = () => {
@@ -60,7 +56,7 @@ const DetailTopic = () => {
               <div className="flex flex-col gap-4">
                 <div className="font-semibold text-3xl text-green-500">{title}</div>
                 <div className="font-semibold text-base text-white h-32">
-                  {data.state?.post?.content}
+                  {post?.content}
                 </div>
                 <div className="flex gap-10 justify-between">
                   <div className="font-semibold text-base text-white flex gap-1 items-center">
