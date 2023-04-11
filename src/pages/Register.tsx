@@ -5,7 +5,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { BiUserCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import HomeButton from "~/components/HomeButton";
-import ThreesDotLoader from "~/icons/ThreeDotsLoader";
+import ThreesDotLoader from "~/components/icons/ThreeDotsLoader";
 
 const LoginPage = () => {
   const {

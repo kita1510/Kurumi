@@ -3,7 +3,7 @@ import SideBar from "~/components/sidebar/Sidebar";
 import client from "~/configs/client";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import useProfile from "~/hooks/useProfile";
-import BeatLoader from "~/icons/BeatLoader";
+import BeatLoader from "~/components/icons/BeatLoader";
 import supabase from "~/lib/supabase";
 import { v4 as uuidv4 } from "uuid";
 

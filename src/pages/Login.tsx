@@ -4,7 +4,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import HomeButton from "~/components/HomeButton";
-import ThreesDotLoader from "~/icons/ThreeDotsLoader";
+import ThreesDotLoader from "~/components/icons/ThreeDotsLoader";
 
 const LoginPage = () => {
   const {
