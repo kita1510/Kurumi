@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const PostContext = () => {
-  return (
-    <div>PostContext</div>
-  )
-}
+  return <div>PostContext</div>;
+};
 
-export default PostContext
+export default PostContext;

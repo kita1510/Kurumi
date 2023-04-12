@@ -1,18 +1,18 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from "react";
 
-import { CgArrowUpO } from 'react-icons/cg';
+import { CgArrowUpO } from "react-icons/cg";
 
 const ScrollOnTop = memo(() => {
   const [isScrool, setIsScrool] = useState(false);
 
   const handleScrool = () => {
     window.onscroll = () => {
-      setIsScrool(window.scrollY > 500 ? true : false);
+      setIsScrool(window.scrollY > 200 ? true : false);
     };
   };
 
   const handleMoveToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {

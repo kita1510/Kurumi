@@ -1,20 +1,33 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { ChangeEvent, useContext, useRef, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
-import SearchItem from "./sliders/SearchItem";
+import { Link } from "react-router-dom";
+import supabase from "~/lib/supabase";
+import { Author } from "~/types";
+import SearchItem from "./shared/SearchItem";
 
 const SearchTab = () => {
   const [result, setResult] = useState("");
+  const [listUser, setListUser] = useState<Author[]>([]);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setResult(e.target.value);
   };
-  const searchRef = useRef<HTMLInputElement>();
+  const searchRef = useRef<HTMLInputElement>(null);
   const handleDelete = () => {
     setResult("");
     searchRef.current?.focus();
   };
 
-  console.log(result);
+  async function getUser() {
+    const { data: user } = await supabase.from("User").select("*").textSearch("name", `${result}`);
+    setListUser(user);
+  }
+
+  useEffect(() => {
+    getUser();
+  }, [result]);
+
+  console.log(listUser);
   return (
     <div className="w-[480px] h-[800px] z-[99999] fixed ml-[100px] rounded-br-3xl rounded-tr-3xl border-r-2 bg-white">
       <div className="w-full h-1/4 border-b-2 border-b-black">
@@ -47,9 +60,11 @@ const SearchTab = () => {
           </div>
         </div> */}
         <div className="flex flex-col mt-4">
-          <SearchItem></SearchItem>
-          <SearchItem></SearchItem>
-          <SearchItem></SearchItem>
+          {listUser?.map((u) => (
+            <Link to={`/profile/${u?.name}`}>
+              <SearchItem name={u?.name} />
+            </Link>
+          ))}
         </div>
       </div>
     </div>

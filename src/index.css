@@ -225,14 +225,12 @@ li:last-of-type {
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
-.custom-file-input::-webkit-textfield-decoration-container{
+.custom-file-input::-webkit-textfield-decoration-container {
   visibility: hidden;
 }
 /* .custom-file-input::-webkit-textfield-decoration-container{
   visibility: none;
 } */
-
-
 
 .custom-file-input::before {
   content: "Change profile photo";

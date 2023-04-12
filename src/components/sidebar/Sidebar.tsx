@@ -13,7 +13,7 @@ const Sidebar = () => {
   const profile = useProfile();
   const [isTab, setIsTab] = useState<boolean>(false);
 
-  console.log(isTab);
+  // console.log(isTab);
 
   const navigations = [
     { id: 1, content: "Home", component: <GrHomeOption size={30} />, link: "/" },
@@ -27,7 +27,7 @@ const Sidebar = () => {
     },
     { id: 5, content: "Ranking", component: <RiCupLine size={30} />, link: "/reading" },
     { id: 6, content: "Create", component: <BiMessageAltAdd size={30} />, link: "/reading" },
-    { id: 7, content: "Library", component: <BiCabinet size={30} />, link: "/reading" },
+    { id: 7, content: "Library", component: <BiCabinet size={30} />, link: "/library" },
   ];
   return (
     <div className="flex z-[9]">

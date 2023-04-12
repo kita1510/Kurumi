@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import Container from '~/components/Container';
-import Sidebar from '~/components/sidebar/Sidebar';
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import Container from "~/components/Container";
+import Sidebar from "~/components/sidebar/Sidebar";
 
 const ReadingPage = () => {
   const data = useLocation();
@@ -9,7 +9,7 @@ const ReadingPage = () => {
   console.log(data);
 
   const handleMoveToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {

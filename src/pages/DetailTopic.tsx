@@ -55,15 +55,15 @@ const DetailTopic = () => {
               </div>
               <div className="flex flex-col gap-4">
                 <div className="font-semibold text-3xl text-green-500">{title}</div>
-                <div className="font-semibold text-base text-white h-32">
-                  {post?.content}
-                </div>
+                <div className="font-semibold text-base text-white h-32">{post?.content}</div>
                 <div className="flex gap-10 justify-between">
                   <div className="font-semibold text-base text-white flex gap-1 items-center">
                     Thể loại:
                     {post?.Category?.map((p) => (
-                      <Link to={`/category/${p?.name}`}>
-                        <button className={`py-1 ml-2 font-semibold rounded-lg px-2 ${randomBgColor()} `}>
+                      <Link to={`/category/${p?.name}`} key={p?.id}>
+                        <button
+                          className={`py-1 ml-2 font-semibold rounded-lg px-2 ${randomBgColor()} `}
+                        >
                           {p?.name}
                         </button>
                       </Link>

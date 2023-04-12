@@ -1,28 +1,27 @@
-import React, { useContext, useEffect } from 'react';
-import Sidebar from '~/components/sidebar/Sidebar';
-import PaginationPage from '~/components/pagination/PaginationPage';
-import SlideActive from '~/components/sliders/SlideUserActive';
-import MainSlider from '~/components/sliders/MainSlider';
-import RandomTopic from '~/components/RandomTopic';
-import { Link } from 'react-router-dom';
-import ScrollOnTop from '~/components/shared/ScrollOnTop';
-import { AuthContext, AuthProps } from '~/contexts/AuthContext';
-import Notification from '~/components/shared/Notification';
-import Category from '~/components/Category';
-import { useQuery } from '@tanstack/react-query';
-import supabase from '~/lib/supabase';
+import React, { useContext, useEffect } from "react";
+import Sidebar from "~/components/sidebar/Sidebar";
+import PaginationPage from "~/components/pagination/PaginationPage";
+import SlideActive from "~/components/sliders/SlideUserActive";
+import MainSlider from "~/components/sliders/MainSlider";
+import RandomTopic from "~/components/RandomTopic";
+import { Link } from "react-router-dom";
+import ScrollOnTop from "~/components/shared/ScrollOnTop";
+import { AuthContext, AuthProps } from "~/contexts/AuthContext";
+import Notification from "~/components/shared/Notification";
+import Category from "~/components/Category";
+import { useQuery } from "@tanstack/react-query";
+import supabase from "~/lib/supabase";
+import useProfiles from "~/hooks/useProfiles";
 
 const HomePage = () => {
   const { user, handleSignOut } = useContext<AuthProps>(AuthContext);
 
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-
-
-
-  // console.log(categories);
+  const userProfile = useProfiles();
+  console.log(userProfile);
 
   return (
     <div className="flex justify-center">
@@ -30,7 +29,7 @@ const HomePage = () => {
         <Notification />
       </div>
       {!user ? (
-        <Link to={'/login'}>
+        <Link to={"/login"}>
           <button className="w-20 h-10 bg-red-600 hover:bg-red-700 fixed rounded-lg top-5 right-20 text-white font-[500]">
             Login
           </button>

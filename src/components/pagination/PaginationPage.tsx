@@ -11,7 +11,7 @@ const PaginationPage = () => {
     <div className="flex justify-center gap-10 mt-5 flex-col w-[70%]">
       <div className="flex gap-10 flex-wrap">
         {posts?.map((p) => (
-          <Link to={{ pathname: `/topic/${p?.title}` }}>
+          <Link to={{ pathname: `/topic/${p?.title}` }} key={p?.id}>
             <Topic key={p?.id} coverPage={p?.coverPage} title={p?.title} />
           </Link>
         ))}

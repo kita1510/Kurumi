@@ -1,6 +1,6 @@
-import React from 'react';
-import { GrHomeRounded } from 'react-icons/gr';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { GrHomeRounded } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 const HomeButton = () => {
   return (

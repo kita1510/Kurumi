@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 export interface AuthUser {
   id: number;
   email: string;
@@ -63,7 +65,13 @@ enum ROLE {
 }
 
 export type CategoriesOnPosts = {
-  postId: number
-  categoryId: number
-}
+  postId: number;
+  categoryId: number;
+};
 
+export interface ToastProps {
+  toggle: boolean;
+  changeToggle: (toggle: boolean) => void;
+  text: ReactElement;
+  changeText: (text: ReactElement) => void;
+}

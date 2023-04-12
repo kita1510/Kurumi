@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const EditProfile = () => {
   const { user } = useContext<AuthProps>(AuthContext);
-  const profile = useProfile();
+  const profile = useProfile(user?.id);
   const [bio, setBio] = useState<string>(profile?.bio);
   const [isLoading, setIsloading] = useState(false);
   const [error, setError] = useState("");
@@ -28,7 +28,7 @@ const EditProfile = () => {
     setBio(e.target.value);
   }
 
-  // console.log(isSuccess);
+  console.log(profile);
 
   async function upLoadAvatar() {
     if (isSuccess) {

@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const NewPost = () => {
-  return (
-    <div className=''>
+  return <div className=""></div>;
+};
 
-    </div>
-  )
-}
-
-export default NewPost
+export default NewPost;

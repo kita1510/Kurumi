@@ -11,15 +11,6 @@ const Topic = ({ title, coverPage }: { title?: string; coverPage?: string | null
         alt=""
       />
       <div className="mx-auto text-sm font-semibold h-[50px]">{title}</div>
-      <div className="flex justify-between items-center mx-2">
-        <div className="flex gap-2 items-center ">
-          <AiOutlineHeart size={24} />
-          <span className="font-semibold">0</span>
-        </div>
-        <div>
-          <GrAddCircle size={24} />
-        </div>
-      </div>
     </div>
   );
 };

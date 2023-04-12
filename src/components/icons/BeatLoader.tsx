@@ -1,10 +1,10 @@
-import React, { CSSProperties } from 'react';
-import ClipLoader from 'react-spinners/ClipLoader';
+import React, { CSSProperties } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const override: CSSProperties = {
-  display: 'block',
-  margin: '0 auto',
-  borderColor: 'green',
+  display: "block",
+  margin: "0 auto",
+  borderColor: "green",
 };
 
 const BeatLoader = ({ loading, color }: { loading: boolean; color: string }) => {

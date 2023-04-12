@@ -9,6 +9,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 // styles
 import "./index.css";
 import SearchContext from "./contexts/SearchContext";
+import ToastContext from "./contexts/ToastContext";
 
 const client = new QueryClient({
   defaultOptions: {
@@ -22,9 +23,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={client}>
         <ReactQueryDevtools />
         <SearchContext>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
+          <ToastContext>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </ToastContext>
         </SearchContext>
       </QueryClientProvider>
     </BrowserRouter>

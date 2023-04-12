@@ -1,15 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
-import { AuthContext, AuthProps } from '~/contexts/AuthContext';
-import supabase from '~/lib/supabase';
+import { useQuery } from "@tanstack/react-query";
+import supabase from "~/lib/supabase";
 
-const useProfile = () => {
-  const { user } = useContext<AuthProps>(AuthContext);
-
+const useProfile = (userId: number) => {
   const { data: userProfile } = useQuery({
-    queryKey: ['profile'],
+    queryKey: ["profile"],
     queryFn: async () => {
-      const profile = await supabase.from('Profile').select('*').eq('userId', user?.id).single();
+      const profile = await supabase.from("Profile").select("*").eq("userId", userId).single();
       return profile?.data;
     },
   });
