@@ -13,9 +13,14 @@ import DetailTopic from "./pages/DetailTopic";
 import Library from "./pages/Library";
 import { useToast } from "./contexts/ToastContext";
 import ToastMessage from "./components/shared/Toast";
+import { useIsFetching, useIsMutating } from "@tanstack/react-query";
+import MoonLoading from "~/components/icons/MoonLoader";
 
 function App() {
   const { toggle, text } = useToast();
+  const isFetching = useIsFetching();
+  const isMutating = useIsMutating();
+  // console.log(isFetching > 0);
   return (
     <div className="relative">
       <Routes>
@@ -32,6 +37,7 @@ function App() {
         <Route path="/library" element={<Library />} />
       </Routes>
       {toggle ? <ToastMessage text={text} time={2000} /> : <Fragment></Fragment>}
+      <MoonLoading loading={isFetching + isMutating > 0} />
     </div>
   );
 }

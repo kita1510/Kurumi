@@ -1,19 +1,18 @@
 import React from "react";
 import { AiFillRead } from "react-icons/ai";
 import { HiHome } from "react-icons/hi";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, Params, useLocation, useParams } from "react-router-dom";
+import InteractBar from "~/components/shared/InteractBar";
 import Sidebar from "~/components/sidebar/Sidebar";
 import usePost from "~/hooks/usePost";
 import { randomBgColor } from "~/utils/listColor";
 
 const DetailTopic = () => {
-  const data = useLocation();
-
-  const { title } = useParams();
-  console.log(data.state);
+  const { title } = useParams<Readonly<Params<string>>>();
+  console.log();
 
   const post = usePost(title);
-  console.log(post);
+  console.log(post?.createdAt);
 
   return (
     <div className="flex w-full">
@@ -46,7 +45,7 @@ const DetailTopic = () => {
                   src="https://i.pinimg.com/564x/ed/9d/61/ed9d617e86b055589629ad79147be790.jpg"
                   alt=""
                 />
-                <Link to={{ pathname: `/read/${title}` }} state={data.state}>
+                <Link to={{ pathname: `/read/${title}` }}>
                   <button className="w-40 h-10 bg-white flex items-center justify-center gap-7 hover:bg-slate-300 ">
                     <AiFillRead size={24} />
                     <span className="font-semibold">Đọc</span>
@@ -55,7 +54,7 @@ const DetailTopic = () => {
               </div>
               <div className="flex flex-col gap-4">
                 <div className="font-semibold text-3xl text-green-500">{title}</div>
-                <div className="font-semibold text-base text-white h-32">{post?.content}</div>
+                <div className="font-semibold text-base text-white h-32">{post?.description}</div>
                 <div className="flex gap-10 justify-between">
                   <div className="font-semibold text-base text-white flex gap-1 items-center">
                     Thể loại:
@@ -69,15 +68,18 @@ const DetailTopic = () => {
                       </Link>
                     ))}
                   </div>
-                  {/* <div className="font-semibold text-base text-white">Lượt thích</div>
-                  <div className="font-semibold text-base text-white">
-                    Năm: {data.state?.post?.createdAt?.split("-")[0]}
-                  </div> */}
+                  <div>
+                    {/* <div className="font-semibold text-base text-white">Lượt thích</div> */}
+                    <div className="font-semibold text-base text-white">
+                      {/* Năm: {post?.createdAt.toISOString()} */}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <InteractBar></InteractBar>
       </div>
     </div>
   );

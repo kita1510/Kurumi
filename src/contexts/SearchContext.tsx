@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export interface SearchProps {

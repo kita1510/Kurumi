@@ -1,6 +1,7 @@
 import { motion, useScroll, useSpring } from "framer-motion";
+import { PostInfo } from "~/hooks/usePost";
 
-export default function Reading() {
+export default function Reading(props: Pick<PostInfo, "content" | "title"> | undefined) {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -10,10 +11,11 @@ export default function Reading() {
 
   return (
     <>
-      <motion.div className="progress-bar" style={{ scaleX }} />
+      <motion.div className="fixed inset-x-0 top-0 bg-red-600 origin-[0%]" style={{ scaleX }} />
       <h1>
-        <code>useScroll</code> with spring smoothing
+        <code>{props?.title}</code>
       </h1>
+      <div className="leading-8">{props?.content}</div>
     </>
   );
 }

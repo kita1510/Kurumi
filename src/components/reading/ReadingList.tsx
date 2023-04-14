@@ -9,11 +9,6 @@ const ReadingList = () => {
       <ReadingCard></ReadingCard>
       <ReadingCard></ReadingCard>
       <ReadingCard></ReadingCard>
-      <ReadingCard></ReadingCard>
-      <ReadingCard></ReadingCard>
-      <ReadingCard></ReadingCard>
-      <ReadingCard></ReadingCard>
-      <ReadingCard></ReadingCard>
     </div>
   );
 };

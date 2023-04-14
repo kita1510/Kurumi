@@ -10,13 +10,14 @@ import { v4 as uuidv4 } from "uuid";
 const EditProfile = () => {
   const { user } = useContext<AuthProps>(AuthContext);
   const profile = useProfile(user?.id);
-  const [bio, setBio] = useState<string>(profile?.bio);
+  const [bio, setBio] = useState<string | undefined>(profile?.bio);
   const [isLoading, setIsloading] = useState(false);
   const [error, setError] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
   const [avatar, setAvatar] = useState(profile?.avatar);
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  console.log(user);
 
   useEffect(() => {
     if (avatarUrl) {
@@ -103,24 +104,14 @@ const EditProfile = () => {
       setIsloading(true);
       try {
         if (profile != null) {
-          const res = await client({
-            method: "PUT",
-            url: `/api/profiles/${profile?.id}`,
-            headers: { Authorization: "Bearer " + user?.accessToken },
-            data: { bio },
-          });
+          const res = await supabase.from("Profile").update({ bio });
           if (res) {
             setMessage("Update bio thành công!");
             console.log(profile);
           }
         }
         if (profile == null) {
-          const res = await client({
-            method: "POST",
-            url: `/api/profiles/`,
-            headers: { Authorization: "Bearer " + user?.accessToken },
-            data: { bio, userId: user?.id },
-          });
+          const res = await supabase.from("Profile").insert({ bio });
           if (res) {
             setMessage("Update bio thành công!");
           }

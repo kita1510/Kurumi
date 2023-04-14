@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react";
 import { BeatLoader } from "react-spinners";
+import { LoaderSizeProps } from "react-spinners/helpers/props";
 
 const override: CSSProperties = {
   display: "block",
@@ -7,7 +8,7 @@ const override: CSSProperties = {
   borderColor: "green",
 };
 
-const ThreesDotLoader = ({ loading }: { loading: boolean }) => {
+const ThreesDotLoader = ({ loading }: LoaderSizeProps) => {
   return (
     <div>
       <BeatLoader color="#385264" cssOverride={override} loading={loading} />

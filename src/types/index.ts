@@ -22,13 +22,14 @@ export interface Category {
 
 export interface Post {
   id: number;
-  title: string;
-  content: string | null;
-  coverPage: string | null;
+  title?: string;
+  content?: string | null;
+  coverPage?: string | null;
+  description: string | null;
   published: boolean;
   liked: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   authorId: number;
 }
 

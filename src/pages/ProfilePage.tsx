@@ -12,9 +12,9 @@ const ProfilePage = () => {
   const param = useParams();
 
   const { u, status } = useUser(param?.id);
-  console.log(u?.id);
+  console.log(u);
 
-  const profile = useProfile(param?.id);
+  const profile = useProfile(2);
 
   console.log(profile);
 

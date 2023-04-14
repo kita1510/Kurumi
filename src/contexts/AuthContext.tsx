@@ -1,8 +1,10 @@
 import React, { ChangeEvent, createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SuccessNotify from "~/components/icons/SuccessNotify";
 import client from "~/configs/client";
 import useLocalStorage from "~/hooks/useLocalStorage";
 import { AuthUser } from "~/types";
+import { useToast } from "./ToastContext";
 
 export interface AuthProps {
   user: AuthUser;
@@ -26,6 +28,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const { changeText, changeToggle } = useToast();
   const navigate = useNavigate();
 
   async function handleLogin() {
@@ -35,10 +38,16 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser(res.data);
         localStorage.setItem("user", JSON.stringify(user));
         setIsLoading(false);
+        setIsSuccess(true);
+        if (res.data) {
+          changeToggle(true);
+          changeText(<SuccessNotify children="Đăng nhập thành công" />);
+        }
       });
       navigate("/");
     } catch (err) {
       setIsLoading(false);
+      setIsSuccess(false);
     }
   }
 
@@ -76,6 +85,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   async function handleSignOut() {
     setUser("");
     localStorage.setItem("user", "");
+    changeToggle(true);
+    changeText(<SuccessNotify children="Đã đăng xuất" />);
   }
 
   return (

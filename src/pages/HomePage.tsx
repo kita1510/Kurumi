@@ -9,19 +9,18 @@ import ScrollOnTop from "~/components/shared/ScrollOnTop";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import Notification from "~/components/shared/Notification";
 import Category from "~/components/Category";
-import { useQuery } from "@tanstack/react-query";
-import supabase from "~/lib/supabase";
 import useProfiles from "~/hooks/useProfiles";
 
 const HomePage = () => {
-  const { user, handleSignOut } = useContext<AuthProps>(AuthContext);
+  const { user, handleSignOut, isSuccess } = useContext<AuthProps>(AuthContext);
+  // console.log(isSuccess);
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   const userProfile = useProfiles();
-  console.log(userProfile);
+  // console.log(userProfile);
 
   return (
     <div className="flex justify-center">

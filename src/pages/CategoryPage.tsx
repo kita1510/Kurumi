@@ -4,19 +4,18 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
 import { HiHome } from "react-icons/hi";
 import { Link, useParams } from "react-router-dom";
+import SuccessNotify from "~/components/icons/SuccessNotify";
 import Topic from "~/components/shared/Topic";
 import Sidebar from "~/components/sidebar/Sidebar";
 import client from "~/configs/client";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import { useToast } from "~/contexts/ToastContext";
 import supabase from "~/lib/supabase";
-import { Author, Category, Post } from "~/types";
+import { Author, CategoriesOnPosts, Category, Post } from "~/types";
 
-export type CategoryOnList = {
-  categoryId: number;
-  postId: number;
-  category: Category;
-  post: Post;
+export type CategoryOnList = Category & {
+  CategoriesOnPosts: CategoriesOnPosts[];
+  Post: Post[];
 };
 
 export type PostOnLibrary = {
@@ -28,22 +27,30 @@ const CategoryPage = () => {
   const { name } = useParams();
   const { user } = useContext<AuthProps>(AuthContext);
   const { changeText, changeToggle } = useToast();
-
-  const controller = new AbortController();
-  const [listTopic, setListTopic] = useState<CategoryOnList[]>([]);
+  // const [listTopic, setListTopic] = useState<CategoryOnList>();
 
   async function getListTopic() {
-    const data = await client.get(`/api/categories/${name}`);
-    setListTopic(data?.data);
+    const { data } = await supabase
+      .from("Category")
+      .select("*,CategoriesOnPosts(*),Post(*)")
+      .eq("name", name)
+      .single();
+    return data;
   }
 
-  async function addToLibrary(l: CategoryOnList) {
-    console.log(l);
-    const req = await supabase.from("PostOnLibrary").insert({ postId: l.postId, userId: user?.id });
-    console.log(req?.data)
+  const { data: listTopic } = useQuery<any, any, CategoryOnList>({
+    queryKey: ["listTopic"],
+    queryFn: getListTopic,
+  });
+
+  console.log(listTopic);
+
+  async function addToLibrary(l: Post) {
+    const req = await supabase.from("PostOnLibrary").insert({ postId: l?.id, userId: user?.id });
+    console.log(req);
     if (req?.data) {
       changeToggle(true);
-      changeText(<div className="font-semibold">Đã thêm vào thư viện</div>);
+      changeText(<SuccessNotify children={"Đã thêm vào thư viện"} />);
     }
   }
   async function getDataInLibrary() {
@@ -57,18 +64,6 @@ const CategoryPage = () => {
   });
 
   console.log(library);
-
-  useEffect(() => {
-    return () => {};
-  }, []);
-
-  useEffect(() => {
-    getListTopic();
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
 
   return (
     <div className="flex ">
@@ -88,10 +83,10 @@ const CategoryPage = () => {
         </div>
         <div className="text-xl font-normal uppercase">Danh sách Topic thuộc thể loại : {name}</div>
         <div className="flex gap-10 mt-5 flex-wrap">
-          {listTopic.map((l) => (
+          {listTopic?.Post.map((l) => (
             <div>
-              <Link to={{ pathname: `/topic/${l?.post?.title}` }} state={l}>
-                <Topic key={l?.categoryId} title={l?.post?.title} coverPage={l?.post?.coverPage} />
+              <Link to={{ pathname: `/topic/${l?.title}` }} state={l}>
+                <Topic key={listTopic?.id} title={l?.title} coverPage={l?.coverPage} />
               </Link>
 
               <div className="flex justify-between items-center mx-2">
@@ -99,15 +94,22 @@ const CategoryPage = () => {
                   <AiOutlineHeart cursor={"pointer"} size={24} />
                   <span className="font-semibold">0</span>
                 </div>
-                {library
-                  ?.filter((i) => {
-                    return i?.postId === l?.postId;
-                  })
-                  .map((i) => (
-                    <div>
-                      <GrAddCircle cursor={"pointer"} size={24} onClick={() => addToLibrary(l)} />
-                    </div>
-                  ))}
+                {library?.length === 0 ? (
+                  <div>
+                    <GrAddCircle cursor={"pointer"} size={24} onClick={() => addToLibrary(l)} />
+                  </div>
+                ) : (
+                  library
+                    ?.filter((i) => {
+                      console.log(i?.postId !== l?.id);
+                      return i?.postId !== l?.id;
+                    })
+                    .map((_) => (
+                      <div>
+                        <GrAddCircle cursor={"pointer"} size={24} onClick={() => addToLibrary(l)} />
+                      </div>
+                    ))
+                )}
               </div>
             </div>
           ))}

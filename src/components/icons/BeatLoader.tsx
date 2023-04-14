@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import { LoaderSizeProps } from "react-spinners/helpers/props";
 
 const override: CSSProperties = {
   display: "block",
@@ -7,7 +8,7 @@ const override: CSSProperties = {
   borderColor: "green",
 };
 
-const BeatLoader = ({ loading, color }: { loading: boolean; color: string }) => {
+const BeatLoader = ({ loading, color }: LoaderSizeProps) => {
   return (
     <div className="sweet-loading">
       <ClipLoader

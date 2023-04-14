@@ -21,9 +21,9 @@ const Library = () => {
     },
   });
 
-  console.log(posts);
+  console.log(posts?.data?.length === 0);
   return (
-    <div className="flex ">
+    <div className="flex">
       <div className="fixed left-0 top-0">
         <Sidebar />
       </div>
@@ -40,6 +40,17 @@ const Library = () => {
 
         <div>
           <div className="text-xl font-normal uppercase">Thư viện của bạn</div>
+          {posts?.data?.length === 0 && (
+            <div className="w-96 mt-10 mr-10 font-semibold">Thư viện đang trống</div>
+          )}
+          {!user && (
+            <div className="w-96 mt-10 mr-10 font-semibold flex gap-2">
+              <Link to={"/login"}>
+                <div className="text-red-500 font-bold hover:text-red-800">Đăng nhập </div>
+              </Link>
+              để thêm vào thư viện
+            </div>
+          )}
           <div className="flex gap-10 mt-5 flex-wrap">
             {posts?.data?.map((l) => (
               <div>

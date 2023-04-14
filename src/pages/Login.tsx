@@ -7,15 +7,8 @@ import HomeButton from "~/components/HomeButton";
 import ThreesDotLoader from "~/components/icons/ThreeDotsLoader";
 
 const LoginPage = () => {
-  const {
-    user,
-    handleEnterEmail,
-    handleEnterPassword,
-    handleRegister,
-    handleLogin,
-    isLoading,
-    isSuccess,
-  } = useContext<AuthProps>(AuthContext);
+  const { user, handleEnterEmail, handleEnterPassword, handleLogin, isLoading, isSuccess } =
+    useContext<AuthProps>(AuthContext);
   return (
     <div className="flex justify-center items-center mt-20">
       <HomeButton />

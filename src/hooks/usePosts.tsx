@@ -11,8 +11,10 @@ export type PostInfo = Post & {
 const usePosts = () => {
   const { data: posts } = useQuery<PostInfo[]>({
     queryKey: ["posts"],
-    queryFn: async () => {
-      const data = await client.get("/api/posts");
+    queryFn: async ({ signal }) => {
+      const data = await client.get("/api/posts", {
+        signal,
+      });
       return data?.data;
     },
   });

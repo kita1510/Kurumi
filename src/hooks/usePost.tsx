@@ -4,10 +4,12 @@ import { CategoriesOnPosts, Post, Category } from "~/types";
 
 export type PostInfo = Post & {
   CategoriesOnPosts: CategoriesOnPosts[];
-  Category: Omit<Category, "id">[];
+  Category: Category[];
 };
-const usePost = (title: string) => {
-  const posts = useQuery<PostInfo>({
+const usePost = (title?: string) => {
+  const ac = new AbortController();
+  ac.abort();
+  const posts = useQuery<any, any, PostInfo>({
     queryKey: ["post"],
     queryFn: async () => {
       const res = await supabase
@@ -15,6 +17,8 @@ const usePost = (title: string) => {
         .select("*,CategoriesOnPosts(categoryId, postId),Category(*)")
         .eq("title", title)
         .single();
+      // .abortSignal(ac.signal)
+      // .then((res) => res.data);
       return res?.data;
     },
   });
