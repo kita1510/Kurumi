@@ -7,15 +7,14 @@ import { Link, useParams } from "react-router-dom";
 import SuccessNotify from "~/components/icons/SuccessNotify";
 import Topic from "~/components/shared/Topic";
 import Sidebar from "~/components/sidebar/Sidebar";
-import client from "~/configs/client";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import { useToast } from "~/contexts/ToastContext";
 import supabase from "~/lib/supabase";
 import { Author, CategoriesOnPosts, Category, Post } from "~/types";
 
 export type CategoryOnList = Category & {
-  CategoriesOnPosts: CategoriesOnPosts[];
-  Post: Post[];
+  CategoriesOnPosts: [CategoriesOnPosts];
+  Post: [Post];
 };
 
 export type PostOnLibrary = {
@@ -28,19 +27,26 @@ const CategoryPage = () => {
   const { user } = useContext<AuthProps>(AuthContext);
   const { changeText, changeToggle } = useToast();
   // const [listTopic, setListTopic] = useState<CategoryOnList>();
+  const ac = new AbortController();
+  // ac.abort();
 
-  async function getListTopic() {
+  console.log(ac.abort());
+
+  async function getListTopic(signal?: AbortSignal) {
     const { data } = await supabase
       .from("Category")
       .select("*,CategoriesOnPosts(*),Post(*)")
       .eq("name", name)
       .single();
+    console.log(signal);
     return data;
   }
 
   const { data: listTopic } = useQuery<any, any, CategoryOnList>({
     queryKey: ["listTopic"],
-    queryFn: getListTopic,
+    queryFn: ({ signal }) => {
+      return getListTopic(signal);
+    },
   });
 
   console.log(listTopic);
@@ -63,7 +69,7 @@ const CategoryPage = () => {
     queryFn: async () => getDataInLibrary(),
   });
 
-  console.log(library);
+  // console.log(library);
 
   return (
     <div className="flex ">
@@ -83,7 +89,7 @@ const CategoryPage = () => {
         </div>
         <div className="text-xl font-normal uppercase">Danh sách Topic thuộc thể loại : {name}</div>
         <div className="flex gap-10 mt-5 flex-wrap">
-          {listTopic?.Post.map((l) => (
+          {listTopic?.Post?.map((l) => (
             <div>
               <Link to={{ pathname: `/topic/${l?.title}` }} state={l}>
                 <Topic key={listTopic?.id} title={l?.title} coverPage={l?.coverPage} />

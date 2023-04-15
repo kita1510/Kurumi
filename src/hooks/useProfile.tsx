@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import supabase from "~/lib/supabase";
 import { Profile } from "~/types";
 
-const useProfile = (userId?: number) => {
+const useProfile = (userId?: number, name?: string) => {
   const { data: userProfile } = useQuery<any, any, Profile>({
     queryKey: ["profile"],
     queryFn: async () => {

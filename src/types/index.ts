@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 export interface AuthUser {
   id: number;
   email: string;
-  name: string;
+  name?: string;
   Role: string;
   accessToken: string;
 }
@@ -40,7 +40,7 @@ export interface UserInfo {
   Role: ROLE;
   email: string;
   profile: Profile | null;
-  posts: Post[];
+  posts: [Post];
 }
 
 export type Comment = {
@@ -54,7 +54,7 @@ export type Comment = {
 
 export type Author = {
   id: number;
-  name: string | null;
+  name?: string;
   email: string;
   password: string;
   Role: ROLE;

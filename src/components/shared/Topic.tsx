@@ -1,8 +1,7 @@
 import React from "react";
-import { AiOutlineHeart } from "react-icons/ai";
-import { GrAddCircle } from "react-icons/gr";
+import { Post } from "~/types";
 
-const Topic = ({ title, coverPage }: { title?: string; coverPage?: string | null }) => {
+const Topic = ({ title, coverPage }: Pick<Post, "title" | "coverPage">) => {
   return (
     <div className="w-[155px] min-h-[250px]  gap-2 relative rounded-sm flex flex-col cursor-pointer">
       <img

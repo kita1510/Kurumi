@@ -14,7 +14,7 @@ const usePost = (title?: string) => {
     queryFn: async () => {
       const res = await supabase
         .from("Post")
-        .select("*,CategoriesOnPosts(categoryId, postId),Category(*)")
+        .select("*,CategoriesOnPosts(*),Category(*)")
         .eq("title", title)
         .single();
       // .abortSignal(ac.signal)

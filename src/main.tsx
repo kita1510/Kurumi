@@ -6,14 +6,13 @@ import AuthProvider from "./contexts/AuthContext";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-// styles
 import "./index.css";
 import SearchContext from "./contexts/SearchContext";
 import ToastContext from "./contexts/ToastContext";
 
 const client = new QueryClient({
   defaultOptions: {
-    queries: { retry: 0 },
+    queries: { retry: 0, refetchOnWindowFocus: false },
   },
 });
 
