@@ -28,13 +28,6 @@ export default function App() {
         className="flex w-[80%] overflow-x-scroll flex-shrink-0 flex-grow-0 basis-[600px] mx-0 my-auto list-none py-5 gap-5  px-5"
         ref={ref}
       >
-        <div className="absolute flex items-center justify-center h-16 ">
-          <GrFormPrevious
-            className="bg-slate-400 rounded-full text-white"
-            size={24}
-            color="white"
-          />
-        </div>
         {users?.map((p) => {
           return (
             <div key={p?.id}>
@@ -42,9 +35,6 @@ export default function App() {
             </div>
           );
         })}
-        <div className="absolute flex items-center justify-center right-96 h-16 ">
-          <GrFormNext className="bg-slate-400 rounded-full text-white" size={24} color="white" />
-        </div>
       </div>
     </>
   );

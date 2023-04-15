@@ -23,7 +23,7 @@ export default function Reading(
   return (
     <>
       <motion.div
-        className=" fixed inset-x-0 top-0 h-3 bg-red-600 origin-[0%]"
+        className=" fixed inset-x-0 top-0 h-1 bg-red-600 origin-[0%]"
         style={{ scaleX }}
       />
       <h1>

@@ -1,97 +1,123 @@
-import { useState } from "react";
-import { motion, AnimatePresence, wrap } from "framer-motion";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import React, { Fragment, useEffect, useState } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const images = [
-  "https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg",
-  "https://wallpapers.com/images/featured/yv96zrvdnvfbt8nn.jpg",
-  "https://wallpaper.dog/large/10723194.jpg",
-  "https://wallpaper.dog/large/6651.png",
-];
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
 
-const variants = {
-  enter: (direction: number) => {
-    return {
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-    };
-  },
-  center: {
-    zIndex: 1,
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction: number) => {
-    return {
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-    };
-  },
-};
+// import required modules
+import { Pagination, Autoplay } from "swiper";
+import { PostInfo } from "~/hooks/usePost";
+import { GoCalendar } from "react-icons/go";
+import { AiFillHeart } from "react-icons/ai";
+import { formatYear } from "~/utils/moment";
+import supabase from "~/lib/supabase";
+import { Link } from "react-router-dom";
+import useListPost from "~/hooks/useListPost";
 
-/**
- * Experimenting with distilling swipe offset and velocity into a single variable, so the
- * less distance a user has swiped, the more velocity they need to register as a swipe.
- * Should accomodate longer swipes and short flicks without having binary checks on
- * just distance thresholds and velocity > 0.
- */
-const swipeConfidenceThreshold = 10000;
-const swipePower = (offset: number, velocity: number) => {
-  return Math.abs(offset) * velocity;
-};
-
-export default function Example() {
-  const [[page, direction], setPage] = useState([0, 0]);
-
-  // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
-  // then wrap that within 0-2 to find our image ID in the array below. By passing an
-  // absolute page index as the `motion` component's `key` prop, `AnimatePresence` will
-  // detect it as an entirely new image. So you can infinitely paginate as few as 1 images.
-  const imageIndex = wrap(0, images.length, page);
-
-  const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
+export default function App() {
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index: number, className: string) {
+      return '<span class="' + className + '">' + "</span>";
+    },
   };
+  const posts = useListPost();
+  console.log(posts);
 
   return (
-    <>
-      <motion.div className="relative w-[600px] h-[350px]">
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.img
-            key={page}
-            className="w-[600px] h-[350px] object-cover object-center absolute"
-            src={images[imageIndex]}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-            }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
-
-              if (swipe < -swipeConfidenceThreshold) {
-                paginate(1);
-              } else if (swipe > swipeConfidenceThreshold) {
-                paginate(-1);
-              }
-            }}
-          ></motion.img>
-        </AnimatePresence>
-        <div className="next right-3" onClick={() => paginate(1)}>
-          <GrFormNext />
-        </div>
-        <div className="prev left-3" onClick={() => paginate(-1)}>
-          <GrFormPrevious />
-        </div>
-      </motion.div>
-    </>
+    <Fragment>
+      <Swiper
+        pagination={pagination}
+        modules={[Pagination, Autoplay]}
+        className="mySwiper absolute "
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
+        centeredSlides={true}
+      >
+        {posts?.map((p) => {
+          return (
+            <Fragment key={p?.id}>
+              <SwiperSlide className="relative">
+                <SliderCard props={p}></SliderCard>
+              </SwiperSlide>
+            </Fragment>
+          );
+        })}
+      </Swiper>
+    </Fragment>
   );
 }
+
+const SliderCard = ({ props }: { props: PostInfo }) => {
+  const [cate, setCate] = useState();
+  const getCategory = async (cateId: number) => {
+    const { data } = await supabase.from("Category").select("*").eq("id", cateId).single();
+    setCate(data?.name);
+    return data?.name;
+  };
+
+  useEffect(() => {
+    getCategory(3);
+  }, []);
+
+  console.log(cate);
+
+  return (
+    // <div className="w-full h-full bg-opacity-70 absolute top-0  bg-black z-[9999999999]">
+    //   <div>
+    //     <img
+    //       className="w-full h-full object-cover "
+    //       src="https://images7.alphacoders.com/100/1002864.png"
+    //       alt=""
+    //     />
+    //   </div>
+    // </div>
+    <div className="w-full h-full bg-slate-200 relative">
+      <img
+        className="w-full h-full object-cover "
+        src="https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg"
+        alt=""
+      />
+      <div className="absolute top-0 w-full h-full bg-opacity-50 bg-black p-5 flex gap-5">
+        <div className="absolute top-0 w-3/5 h-full bg-opacity-70 bg-black left-0 p-3">
+          <div className="text-white font-[600] text-3xl font-monospace mt-4 break-words text-left pl-5">
+            {props?.title}
+          </div>
+          <div className="flex pl-5 mt-3 gap-3">
+            <div className="flex items-center gap-1">
+              <AiFillHeart size={16} color="red"></AiFillHeart>
+              <span className="font-semibold text-white text-sm">20</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <GoCalendar size={14} color="white"></GoCalendar>
+              <span className="font-semibold text-white text-sm">
+                {formatYear(props?.createdAt)}
+              </span>
+            </div>
+          </div>
+          <div className="text-sm text-white mt-3 font-medium pl-5 text-left">
+            {props?.description}
+          </div>
+          <div className="mt-3 pl-5 text-left flex items-center gap-3">
+            <span className="text-white text-sm font-semibold">Thể loại</span>
+            {props?.Category.map((c) => (
+              <Fragment key={c?.id}>
+                <Link to={`/category/${c?.name}`}>
+                  <button className="px-3 h-7 hover:bg-red-700 hover:border-red-700 border-white border-2 rounded-md text-sm text-white gap-3">
+                    {c?.name}
+                  </button>
+                </Link>
+              </Fragment>
+            ))}
+          </div>
+          <Link to={`/topic/${props?.title}`}>
+            <button className="bg-red-700 w-20 mt-6  h-8 text-[14px] leading-3 font-semibold text-white float-left ml-5 hover:bg-white hover:text-black">
+              Đọc
+            </button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};

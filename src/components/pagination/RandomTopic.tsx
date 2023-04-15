@@ -21,7 +21,7 @@ const RandomTopic = () => {
   });
 
   return (
-    <div className="w-[250px] text-sm h-[200px] bg-[#fafafa] absolute right-0 flex flex-col gap-3 p-5">
+    <div className="w-[250px] text-sm h-[200px] bg-white absolute right-0 flex flex-col gap-3 p-5">
       <div className="text-sm font-semibold">Hôm nay đọc gì?</div>
       <div>Nếu bạn buồn phiền không biết đọc gì hôm nay. Hãy để chúng tôi chọn cho bạn</div>
       <Link to={`/topic/${topic?.title}`}>

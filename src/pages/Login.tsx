@@ -3,7 +3,7 @@ import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import HomeButton from "~/components/HomeButton";
+import HomeButton from "~/components/shared/HomeButton";
 import ThreesDotLoader from "~/components/icons/ThreeDotsLoader";
 
 const LoginPage = () => {

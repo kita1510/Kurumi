@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import usePosts from "~/hooks/usePosts";
 import Topic from "../shared/Topic";
 
-const PaginationPage = () => {
+const Pagination = () => {
   const [isActive, setIsActive] = useState(false);
   const posts = usePosts();
 
@@ -39,4 +39,4 @@ const PaginationPage = () => {
   );
 };
 
-export default PaginationPage;
+export default Pagination;

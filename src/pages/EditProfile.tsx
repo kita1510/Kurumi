@@ -1,19 +1,11 @@
-import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
-import SideBar from "~/components/sidebar/Sidebar";
-import client from "~/configs/client";
-import { AuthContext, AuthProps } from "~/contexts/AuthContext";
-import useProfile from "~/hooks/useProfile";
+import React from "react";
 import BeatLoader from "~/components/icons/BeatLoader";
-import supabase from "~/lib/supabase";
-import { v4 as uuidv4 } from "uuid";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { Profile } from "~/types";
-import { useParams } from "react-router-dom";
+import Sidebar from "~/components/sidebar/Sidebar";
 
 const EditProfile = () => {
   return (
     <div className="w-full h-[600px]">
-      <SideBar></SideBar>
+      <Sidebar />
       <div className="pl-[100px] ">
         <div>
           <div className="p-10 text-3xl font-semibold">Settings</div>

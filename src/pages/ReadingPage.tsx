@@ -12,6 +12,12 @@ const ReadingPage = () => {
   const handleMoveToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    handleMoveToTop();
+    return () => {};
+  }, []);
+
   const param = useParams();
   // console.log(param);
 
@@ -31,18 +37,18 @@ const ReadingPage = () => {
 
   console.log(post?.createdAt);
 
-  useEffect(() => {
-    handleMoveToTop();
-    return () => {};
-  }, []);
-
   return (
     <div>
       <div className="fixed left-0 top-0">
         <Sidebar />
       </div>
       <div className="ml-[200px] w-3/5">
-        <Reading title={post?.title} content={post?.content} createdAt={post?.createdAt} name={author?.name}/>
+        <Reading
+          title={post?.title}
+          content={post?.content}
+          createdAt={post?.createdAt}
+          name={author?.name}
+        />
         <ScrollOnTop />
       </div>
     </div>

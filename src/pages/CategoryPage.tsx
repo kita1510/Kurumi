@@ -57,6 +57,8 @@ const CategoryPage = () => {
     if (req?.data) {
       changeToggle(true);
       changeText(<SuccessNotify children={"Đã thêm vào thư viện"} />);
+    } else {
+      changeText(<SuccessNotify children={"Đã có trong thư viện"} />);
     }
   }
   async function getDataInLibrary() {
@@ -100,22 +102,9 @@ const CategoryPage = () => {
                   <AiOutlineHeart cursor={"pointer"} size={24} />
                   <span className="font-semibold">0</span>
                 </div>
-                {library?.length === 0 ? (
-                  <div>
-                    <GrAddCircle cursor={"pointer"} size={24} onClick={() => addToLibrary(l)} />
-                  </div>
-                ) : (
-                  library
-                    ?.filter((i) => {
-                      console.log(i?.postId !== l?.id);
-                      return i?.postId !== l?.id;
-                    })
-                    .map((_) => (
-                      <div>
-                        <GrAddCircle cursor={"pointer"} size={24} onClick={() => addToLibrary(l)} />
-                      </div>
-                    ))
-                )}
+                <div>
+                  <GrAddCircle cursor={"pointer"} size={24} onClick={() => addToLibrary(l)} />
+                </div>
               </div>
             </div>
           ))}

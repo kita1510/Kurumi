@@ -5,7 +5,7 @@ import { LoaderSizeProps } from "react-spinners/helpers/props";
 const cssOverride: CSSProperties = {
   position: "absolute",
   top: "20px",
-  right: "200px",
+  right: "20px",
   zIndex: 999999,
 };
 const App = ({ loading }: LoaderSizeProps) => {
