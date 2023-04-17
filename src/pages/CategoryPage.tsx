@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
 import { HiHome } from "react-icons/hi";
@@ -13,7 +13,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import useAddLibrary from "~/hooks/useAddLibrary";
 import useLikePost from "~/hooks/useLikePost";
-import useListPost from "~/hooks/useListPost";
 import { useToast } from "~/contexts/ToastContext";
 import SuccessNotify from "~/components/icons/SuccessNotify";
 

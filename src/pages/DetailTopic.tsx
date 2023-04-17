@@ -5,7 +5,6 @@ import { Link, Params, useLocation, useParams } from "react-router-dom";
 import InteractBar from "~/components/shared/InteractBar";
 import Sidebar from "~/components/sidebar/Sidebar";
 import usePost from "~/hooks/usePost";
-import { randomBgColor } from "~/utils/listColor";
 import { formatDate, formatYear } from "~/utils/moment";
 
 const DetailTopic = () => {
@@ -13,7 +12,7 @@ const DetailTopic = () => {
   console.log();
 
   const post = usePost(title);
-  console.log(post?.createdAt);
+  console.log(post);
 
   const handleMoveToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -89,7 +88,7 @@ const DetailTopic = () => {
                     </div>
                     <div className="font-semibold text-base text-white flex flex-col">
                       <span className="text-base">Lượt thích: </span>
-                      <span className="font-semibold text-base">0</span>
+                      <span className="font-semibold text-base">{}</span>
                     </div>
                   </div>
                 </div>
