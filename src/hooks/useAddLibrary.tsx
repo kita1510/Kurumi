@@ -10,7 +10,7 @@ const useAddLibrary = () => {
   const { changeText, changeToggle } = useToast();
   const { user } = useAuthUser();
 
-  const { mutate } = useMutation({
+  const {mutate} = useMutation({
     mutationFn: addToLibrary,
   });
 
@@ -26,7 +26,7 @@ const useAddLibrary = () => {
     }
   }
 
-  return { addToLibrary };
+  return { addToLibrary,mutate };
 };
 
 export default useAddLibrary;

@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "~/lib/supabase";
-import { Author, CategoriesOnPosts, Comment, Post } from "~/types";
+import { Author, CategoriesOnPosts, Comment, LikedPost, Post } from "~/types";
 
 export type PostInfo = Post & {
   author: Author;
   comment: Comment[];
   categories: CategoriesOnPosts[];
+  PostOnLiked: [LikedPost];
 };
 
 const usePosts = () => {
@@ -14,7 +15,7 @@ const usePosts = () => {
     queryFn: async () => {
       const { data } = await supabase
         .from("Post")
-        .select("*,CategoriesOnPosts(*),Category!inner(*),PostOnLiked(*)");
+        .select("*,CategoriesOnPosts(*),Category(*),PostOnLiked(*)");
       // console.log(signal);
       return data;
     },

@@ -21,7 +21,6 @@ export default function App() {
   const posts = useListPost();
   // console.log(posts);
 
-
   return (
     <Fragment>
       <Swiper
@@ -53,7 +52,6 @@ const SliderCard = ({ props }: { props: PostInfo }) => {
     return data?.name;
   };
 
-
   useEffect(() => {
     getCategory(3);
   }, []);
@@ -75,7 +73,7 @@ const SliderCard = ({ props }: { props: PostInfo }) => {
           <div className="flex pl-5 mt-3 gap-3">
             <div className="flex items-center gap-1">
               <AiFillHeart size={16} color="red"></AiFillHeart>
-              <span className="font-semibold text-white text-sm">20</span>
+              <span className="font-semibold text-white text-sm">{props?.PostOnLiked?.length}</span>
             </div>
             <div className="flex items-center gap-1">
               <GoCalendar size={14} color="white"></GoCalendar>

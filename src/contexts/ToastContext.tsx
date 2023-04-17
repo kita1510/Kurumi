@@ -1,5 +1,11 @@
 import React, { createContext, ReactElement, ReactNode, useContext, useState } from "react";
-import { ToastProps } from "../types/index";
+
+export interface ToastProps {
+  toggle: boolean;
+  changeToggle: (toggle: boolean) => void;
+  text: ReactElement;
+  changeText: (text: ReactElement) => void;
+}
 
 export const ToastContext = createContext<ToastProps>(null!);
 

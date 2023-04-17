@@ -56,7 +56,6 @@ export type Author = {
   id: number;
   name?: string;
   email: string;
-  password: string;
   Role: ROLE;
 };
 
@@ -70,9 +69,7 @@ export type CategoriesOnPosts = {
   categoryId: number;
 };
 
-export interface ToastProps {
-  toggle: boolean;
-  changeToggle: (toggle: boolean) => void;
-  text: ReactElement;
-  changeText: (text: ReactElement) => void;
-}
+export type LikedPost = {
+  postId: number;
+  userId: number;
+};

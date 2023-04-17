@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import useAddLibrary from "~/hooks/useAddLibrary";
+import useLikePost from "~/hooks/useLikePost";
 import usePosts from "~/hooks/usePosts";
 import Topic from "../shared/Topic";
 
 const Pagination = () => {
   const [isActive, setIsActive] = useState(false);
   const posts = usePosts();
+
+  const { mutate: libraryMutate } = useAddLibrary();
+  const { mutate: likeMutate } = useLikePost();
 
   const active = "bg-red-500";
 
@@ -21,11 +26,17 @@ const Pagination = () => {
             </Link>
             <div className="flex justify-between items-center mx-3">
               <div className="flex gap-2 items-center ">
-                <AiOutlineHeart cursor={"pointer"} size={24} />
-                <span className="font-semibold">0</span>
+                <AiOutlineHeart cursor={"pointer"} size={24} onClick={() => likeMutate(p)} />
+                <span className="font-semibold">{p?.PostOnLiked?.length}</span>
               </div>
               <div>
-                <GrAddCircle cursor={"pointer"} size={24} />
+                <GrAddCircle
+                  cursor={"pointer"}
+                  size={24}
+                  onClick={() => {
+                    libraryMutate(p);
+                  }}
+                />
               </div>
             </div>
           </div>

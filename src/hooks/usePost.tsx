@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "~/lib/supabase";
+import { PostLiked } from "~/pages/home/CategoryPage";
 import { CategoriesOnPosts, Post, Category } from "~/types";
 
 export type PostInfo = Post & {
   CategoriesOnPosts: CategoriesOnPosts[];
   Category: Category[];
+  PostOnLiked: [PostLiked];
 };
 const usePost = (title?: string) => {
   const ac = new AbortController();

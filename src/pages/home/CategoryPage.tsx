@@ -35,7 +35,7 @@ export type PostOnLibrary = {
 const CategoryPage = () => {
   const { name } = useParams();
   const { user } = useAuthUser();
-  const { addToLibrary } = useAddLibrary();
+  const { addToLibrary, mutate: libraryMutate } = useAddLibrary();
   const { likeAPost, mutate } = useLikePost();
   const queryClient = useQueryClient();
   const { changeToggle, changeText } = useToast();
@@ -135,7 +135,7 @@ const CategoryPage = () => {
                   </div>
 
                   <div>
-                    <GrAddCircle cursor={"pointer"} size={24} onClick={() => addToLibrary(l)} />
+                    <GrAddCircle cursor={"pointer"} size={24} onClick={() => libraryMutate(l)} />
                   </div>
                 </div>
               </div>

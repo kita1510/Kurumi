@@ -72,7 +72,7 @@ const DetailTopic = () => {
                         {post?.Category?.map((p) => (
                           <Link to={`/category/${p?.name}`} key={p?.id}>
                             <button
-                              className={`py-1 ml-2 font-normal text-sm border-2 rounded-md px-3 bg-transparent hover:font-semibold hover:bg-white hover:text-black`}
+                              className={`py-1 ml-2 text-sm border-2 rounded-md px-3 bg-transparent font-semibold hover:bg-white hover:text-black`}
                             >
                               {p?.name}
                             </button>
@@ -88,7 +88,7 @@ const DetailTopic = () => {
                     </div>
                     <div className="font-semibold text-base text-white flex flex-col">
                       <span className="text-base">Lượt thích: </span>
-                      <span className="font-semibold text-base">{}</span>
+                      <span className="font-semibold text-base">{post?.PostOnLiked?.length}</span>
                     </div>
                   </div>
                 </div>
