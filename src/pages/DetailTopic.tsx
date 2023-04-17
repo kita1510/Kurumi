@@ -73,7 +73,7 @@ const DetailTopic = () => {
                         {post?.Category?.map((p) => (
                           <Link to={`/category/${p?.name}`} key={p?.id}>
                             <button
-                              className={`py-1 ml-2 font-normal text-sm border-2 rounded-md px-3 bg-transparent hover:bg-white hover:text-black`}
+                              className={`py-1 ml-2 font-normal text-sm border-2 rounded-md px-3 bg-transparent hover:font-semibold hover:bg-white hover:text-black`}
                             >
                               {p?.name}
                             </button>

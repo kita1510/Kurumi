@@ -7,39 +7,27 @@ import RandomTopic from "~/components/pagination/RandomTopic";
 import { Link } from "react-router-dom";
 import ScrollOnTop from "~/components/shared/ScrollOnTop";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
-import Notification from "~/components/shared/Notification";
 import Category from "~/components/Category";
-import useProfiles from "~/hooks/useProfiles";
-import useListPost from "~/hooks/useListPost";
+
 
 const HomePage = () => {
-  const { user, handleSignOut, isSuccess } = useContext<AuthProps>(AuthContext);
-  // console.log(isSuccess);
+  const { user, handleSignOut } = useContext<AuthProps>(AuthContext);
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-  const userProfile = useProfiles();
-  // console.log(userProfile);
-
-  const listPost = useListPost();
-  console.log(listPost);
-
   return (
     <div className="flex justify-center">
-      <div className="fixed top-24 right-20">
-        <Notification />
-      </div>
       {!user ? (
         <Link to={"/login"}>
-          <button className="w-20 h-10 z-[9999999] bg-red-600 hover:bg-red-700 fixed rounded-lg top-5 right-20 text-white font-[500]">
+          <button className="w-20 h-10 z-[9999999] bg-red-600 hover:bg-red-700 fixed rounded-lg top-5 right-16 text-white font-[500]">
             Login
           </button>
         </Link>
       ) : (
         <button
-          className="w-20 h-10 bg-red-600 z-[9999999] hover:bg-red-800 fixed rounded-lg top-5 right-20 text-white font-[500]"
+          className="w-20 h-10 bg-red-600 z-[9999999] hover:bg-red-800 fixed rounded-lg top-5 right-16 text-white font-[500]"
           onClick={handleSignOut}
         >
           Log Out

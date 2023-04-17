@@ -253,31 +253,7 @@ li:last-of-type {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
-.swiper {
-  width: 72%;
-  height: 85%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .swiper-pagination-bullet {
-  /* text-align: left; */
   float: right;
   line-height: 20px;
   font-size: 12px;

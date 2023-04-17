@@ -9,9 +9,11 @@ const Pagination = () => {
   const [isActive, setIsActive] = useState(false);
   const posts = usePosts();
 
+  const active = "bg-red-500";
+
   return (
     <div className="flex justify-center gap-10 mt-5 flex-col w-[70%]">
-      <div className="flex gap-10 flex-wrap">
+      <div className="flex gap-5 flex-wrap">
         {posts?.map((p) => (
           <div className="flex flex-col" key={p?.id}>
             <Link to={{ pathname: `/topic/${p?.title}` }} key={p?.id}>
@@ -31,9 +33,19 @@ const Pagination = () => {
       </div>
       <div className="flex gap-3 justify-center">
         <button className={`w-10 h-10 font-semibold text-white bg-red-500 rounded-xl`}>1</button>
-        <button className={`w-10 h-10 font-semibold text-white bg-red-500 rounded-xl`}>2</button>
-        <button className={`w-10 h-10 font-semibold text-white bg-red-500 rounded-xl`}>3</button>
-        <button className={`w-10 h-10 font-semibold text-white bg-red-500 rounded-xl`}>4</button>
+        <button className={`w-10 h-10 font-semibold text-black border-2 border-red-500 rounded-xl`}>
+          2
+        </button>
+        <button
+          className={`w-10 h-10 font-semibold text-black border-2 border-red-500  rounded-xl`}
+        >
+          3
+        </button>
+        <button
+          className={`w-10 h-10 font-semibold text-black border-2 border-red-500  rounded-xl`}
+        >
+          4
+        </button>
       </div>
     </div>
   );

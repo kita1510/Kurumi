@@ -1,5 +1,5 @@
-import React, { Fragment, useContext } from "react";
-import { AuthContext, AuthProps } from "~/contexts/AuthContext";
+import React, { useState } from "react";
+import { useAuthUser } from "~/contexts/AuthContext";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { Link } from "react-router-dom";
@@ -7,8 +7,13 @@ import HomeButton from "~/components/shared/HomeButton";
 import ThreesDotLoader from "~/components/icons/ThreeDotsLoader";
 
 const LoginPage = () => {
-  const { user, handleEnterEmail, handleEnterPassword, handleLogin, isLoading, isSuccess } =
-    useContext<AuthProps>(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { handleLogin } = useAuthUser();
+
+  const loginMutation = handleLogin({ email, password });
+  console.log(loginMutation);
+
   return (
     <div className="flex justify-center items-center mt-20">
       <HomeButton />
@@ -20,7 +25,11 @@ const LoginPage = () => {
               Email:
             </label>
           </div>
-          <input className="px-2 py-1 border-2" onChange={handleEnterEmail} type="email" />
+          <input
+            className="px-2 py-1 border-2"
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+          />
         </div>
         <div className="flex items-center justify-between gap-4 w-80">
           <div className="flex items-center gap-2">
@@ -29,15 +38,19 @@ const LoginPage = () => {
               Password:
             </label>
           </div>
-          <input className="px-2 py-1 border-2" onChange={handleEnterPassword} type="password" />
+          <input
+            className="px-2 py-1 border-2"
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+          />
         </div>
         <div>
-          {isLoading ? (
-            <ThreesDotLoader loading={isLoading} />
+          {loginMutation.isLoading ? (
+            <ThreesDotLoader loading={loginMutation.isLoading} />
           ) : (
             <button
               className="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg outline-none mx-auto "
-              onClick={handleLogin}
+              onClick={() => loginMutation.mutate()}
             >
               Log In
             </button>
@@ -49,11 +62,6 @@ const LoginPage = () => {
             <b> Đăng kí ngay</b>
           </Link>
         </div>
-        {isSuccess ? (
-          <div className="mt-2 font-semibold">Đăng kí tài khoản thành công. Vui lòng đăng nhập</div>
-        ) : (
-          <div></div>
-        )}
       </div>
     </div>
   );

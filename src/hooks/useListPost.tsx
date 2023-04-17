@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import client from "~/configs/client";
 import supabase from "~/lib/supabase";
-import { Author, CategoriesOnPosts, Category, Comment, Post } from "~/types";
+import { CategoriesOnPosts, Category, Post } from "~/types";
 
 export type PostInfo = Post & {
   CategoriesOnPosts: CategoriesOnPosts[];
@@ -12,7 +11,7 @@ const useListPost = () => {
   const getData = async () => {
     const { data, error } = await supabase
       .from("Post")
-      .select("*, CategoriesOnPosts(*),Category(*)");
+      .select("*, CategoriesOnPosts(*),Category(*),PostOnLiked(*)");
     return data;
   };
   const { data: posts } = useQuery<any, any, PostInfo[]>({

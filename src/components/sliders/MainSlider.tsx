@@ -1,12 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-
-// import required modules
 import { Pagination, Autoplay } from "swiper";
 import { PostInfo } from "~/hooks/usePost";
 import { GoCalendar } from "react-icons/go";
@@ -15,6 +8,8 @@ import { formatYear } from "~/utils/moment";
 import supabase from "~/lib/supabase";
 import { Link } from "react-router-dom";
 import useListPost from "~/hooks/useListPost";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export default function App() {
   const pagination = {
@@ -24,14 +19,15 @@ export default function App() {
     },
   };
   const posts = useListPost();
-  console.log(posts);
+  // console.log(posts);
+
 
   return (
     <Fragment>
       <Swiper
         pagination={pagination}
         modules={[Pagination, Autoplay]}
-        className="mySwiper absolute "
+        className="w-[70%] h-[90%] absolute"
         autoplay={{ delay: 3500, disableOnInteraction: false }}
         centeredSlides={true}
       >
@@ -57,22 +53,14 @@ const SliderCard = ({ props }: { props: PostInfo }) => {
     return data?.name;
   };
 
+
   useEffect(() => {
     getCategory(3);
   }, []);
 
-  console.log(cate);
+  // console.log(cate);
 
   return (
-    // <div className="w-full h-full bg-opacity-70 absolute top-0  bg-black z-[9999999999]">
-    //   <div>
-    //     <img
-    //       className="w-full h-full object-cover "
-    //       src="https://images7.alphacoders.com/100/1002864.png"
-    //       alt=""
-    //     />
-    //   </div>
-    // </div>
     <div className="w-full h-full bg-slate-200 relative">
       <img
         className="w-full h-full object-cover "

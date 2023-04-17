@@ -1,20 +1,31 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
 import { HiHome } from "react-icons/hi";
 import { Link, useParams } from "react-router-dom";
-import SuccessNotify from "~/components/icons/SuccessNotify";
 import Topic from "~/components/shared/Topic";
 import Sidebar from "~/components/sidebar/Sidebar";
-import { AuthContext, AuthProps } from "~/contexts/AuthContext";
-import { useToast } from "~/contexts/ToastContext";
+import { AuthContext, AuthProps, useAuthUser } from "~/contexts/AuthContext";
 import supabase from "~/lib/supabase";
 import { Author, CategoriesOnPosts, Category, Post } from "~/types";
+import "swiper/css";
+import "swiper/css/pagination";
+import useAddLibrary from "~/hooks/useAddLibrary";
+import useLikePost from "~/hooks/useLikePost";
+import useListPost from "~/hooks/useListPost";
+import { useToast } from "~/contexts/ToastContext";
+import SuccessNotify from "~/components/icons/SuccessNotify";
 
-export type CategoryOnList = Category & {
+export type CategoryOnList = Post & {
   CategoriesOnPosts: [CategoriesOnPosts];
-  Post: [Post];
+  Post: [Category];
+  PostOnLiked: [PostLiked];
+};
+
+export type PostLiked = {
+  postId: number;
+  userId: number;
 };
 
 export type PostOnLibrary = {
@@ -24,52 +35,48 @@ export type PostOnLibrary = {
 
 const CategoryPage = () => {
   const { name } = useParams();
-  const { user } = useContext<AuthProps>(AuthContext);
-  const { changeText, changeToggle } = useToast();
-  // const [listTopic, setListTopic] = useState<CategoryOnList>();
-  const ac = new AbortController();
-  // ac.abort();
+  const { user } = useAuthUser();
+  const { addToLibrary } = useAddLibrary();
+  const { likeAPost, mutate } = useLikePost();
+  const queryClient = useQueryClient();
+  const { changeToggle, changeText } = useToast();
 
-  console.log(ac.abort());
-
-  async function getListTopic(signal?: AbortSignal) {
+  async function getListTopic() {
     const { data } = await supabase
-      .from("Category")
-      .select("*,CategoriesOnPosts(*),Post(*)")
-      .eq("name", name)
-      .single();
-    console.log(signal);
+      .from("Post")
+      .select("*,CategoriesOnPosts(*),Category!inner(*),PostOnLiked(*)")
+      .eq("Category.name", name);
+    // console.log(signal);
     return data;
   }
 
-  const { data: listTopic } = useQuery<any, any, CategoryOnList>({
+  const { data: listTopic } = useQuery<any, any, CategoryOnList[]>({
     queryKey: ["listTopic"],
-    queryFn: ({ signal }) => {
-      return getListTopic(signal);
+    queryFn: () => {
+      return getListTopic();
     },
   });
 
   console.log(listTopic);
 
-  async function addToLibrary(l: Post) {
-    const req = await supabase.from("PostOnLibrary").insert({ postId: l?.id, userId: user?.id });
-    console.log(req);
-    if (req?.data) {
-      changeToggle(true);
-      changeText(<SuccessNotify children={"Đã thêm vào thư viện"} />);
-    } else {
-      changeText(<SuccessNotify children={"Đã có trong thư viện"} />);
-    }
-  }
-  async function getDataInLibrary() {
-    const { data } = await supabase.from("PostOnLibrary").select("*").eq("userId", user?.id);
-    return data;
-  }
+  // useEffect(() => {
+  //   getListTopic();
+  // }, [listTopic, user]);
 
-  const { data: library } = useQuery({
-    queryKey: ["library"],
-    queryFn: async () => getDataInLibrary(),
-  });
+  // console.log(listQuery);
+  // console.log(like);
+
+  // console.log(listTopic);
+
+  // async function getDataInLibrary() {
+  //   const { data } = await supabase.from("PostOnLibrary").select("*").eq("userId", user?.id);
+  //   return data;
+  // }
+
+  // const { data: library } = useQuery({
+  //   queryKey: ["library"],
+  //   queryFn: async () => getDataInLibrary(),
+  // });
 
   // console.log(library);
 
@@ -91,23 +98,50 @@ const CategoryPage = () => {
         </div>
         <div className="text-xl font-normal uppercase">Danh sách Topic thuộc thể loại : {name}</div>
         <div className="flex gap-10 mt-5 flex-wrap">
-          {listTopic?.Post?.map((l) => (
-            <div>
-              <Link to={{ pathname: `/topic/${l?.title}` }} state={l}>
-                <Topic key={listTopic?.id} title={l?.title} coverPage={l?.coverPage} />
-              </Link>
+          {listTopic?.map((l) => {
+            return (
+              <div>
+                <Link to={{ pathname: `/topic/${l?.title}` }} state={l}>
+                  <Topic key={l?.id} title={l?.title} coverPage={l?.coverPage} />
+                </Link>
 
-              <div className="flex justify-between items-center mx-2">
-                <div className="flex gap-2 items-center ">
-                  <AiOutlineHeart cursor={"pointer"} size={24} />
-                  <span className="font-semibold">0</span>
-                </div>
-                <div>
-                  <GrAddCircle cursor={"pointer"} size={24} onClick={() => addToLibrary(l)} />
+                <div className="flex justify-between items-center mx-2">
+                  <div className="flex gap-2 items-center">
+                    {/* {l?.PostOnLiked?.map((i) => {
+                      if (i?.userId !== user?.id)
+                      return ( */}
+                    <AiOutlineHeart
+                      cursor={"pointer"}
+                      size={24}
+                      onClick={() => {
+                        mutate(l, {
+                          onSuccess: () => {
+                            changeToggle(true);
+                            changeText(
+                              <SuccessNotify children="Đã thích bài viết"></SuccessNotify>,
+                            );
+                          },
+                        });
+                        // window.location.reload()
+                      }}
+                      // }
+                    />
+                    {/* );
+                       else {
+                        return <AiFillHeart cursor={"pointer"} size={24}></AiFillHeart>;
+                      }
+                    })} */}
+
+                    <span className="font-semibold">{l?.PostOnLiked?.length}</span>
+                  </div>
+
+                  <div>
+                    <GrAddCircle cursor={"pointer"} size={24} onClick={() => addToLibrary(l)} />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

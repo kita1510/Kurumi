@@ -13,7 +13,8 @@ const InteractBar = () => {
       <div className="flex gap-5">
         {interactBars?.map((i) => (
           <button
-            className={`flex justify-center items-center border-2 border-black rounded-full w-10 h-10 ${i.hover}`}
+            className={`flex justify-center hover:scale-150 
+          items-center border-2 border-black rounded-full w-10 h-10 ${i.hover}`}
           >
             {i.featuring}
           </button>

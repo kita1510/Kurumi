@@ -1,4 +1,5 @@
-import React, { ChangeEvent, createContext, ReactNode, useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import React, { createContext, ReactNode, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SuccessNotify from "~/components/icons/SuccessNotify";
 import client from "~/configs/client";
@@ -8,78 +9,51 @@ import { useToast } from "./ToastContext";
 
 export interface AuthProps {
   user: AuthUser;
-  handleEnterUserName: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleEnterEmail: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleEnterPassword: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleRegister: () => void;
-  handleLogin: () => void;
+  handleRegister: ({ email, password, name }: UserInput) => any;
+  handleLogin: ({ email, password }: Omit<UserInput, "name">) => any;
   handleSignOut: () => void;
-  isLoading: boolean;
-  isSuccess: boolean;
 }
+
+type UserInput = {
+  email: string;
+  password: string;
+  name: string;
+};
 
 export const AuthContext = createContext<AuthProps>(null!);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useLocalStorage<AuthUser>("user", null!);
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isError, setIsError] = useState(false);
   const { changeText, changeToggle } = useToast();
   const navigate = useNavigate();
 
-  async function handleLogin() {
-    setIsLoading(true);
-    try {
-      const res = await client.post("/api/auth/login", { email, password }).then((res) => {
-        setUser(res.data);
-        localStorage.setItem("user", JSON.stringify(user));
-        setIsLoading(false);
-        setIsSuccess(true);
-        if (res.data) {
-          changeToggle(true);
-          changeText(<SuccessNotify children="Đăng nhập thành công" />);
-        }
-      });
-      navigate("/");
-    } catch (err) {
-      setIsLoading(false);
-      setIsSuccess(false);
-    }
+  const login = async ({ email, password }: Omit<UserInput, "name">) => {
+    await client.post("/api/auth/login", { email, password }).then((res) => setUser(res.data));
+    navigate("/");
+  };
+  function handleLogin({ email, password }: Omit<UserInput, "name">) {
+    return useMutation({
+      mutationFn: () => login({ email, password }),
+      onSuccess: () => {
+        changeToggle(true);
+        changeText(<SuccessNotify children="Đăng nhập thành công" />);
+      },
+    });
   }
 
-  function handleEnterUserName(e: ChangeEvent<HTMLInputElement>) {
-    setUserName(e.target.value);
-    console.log(userName);
-  }
-  function handleEnterEmail(e: ChangeEvent<HTMLInputElement>) {
-    setEmail(e.target.value);
-    console.log(email);
-  }
-  function handleEnterPassword(e: ChangeEvent<HTMLInputElement>) {
-    setPassword(e.target.value);
-    console.log(password);
-  }
+  const register = async ({ email, password, name }: UserInput) => {
+    await client.post("/api/auth/register", { name, email, password });
+    navigate("/login");
+  };
 
-  async function handleRegister() {
-    setIsLoading(true);
-    try {
-      await client.post("/api/auth/register", { name: userName, email, password });
-      setIsLoading(false);
-      setIsSuccess(true);
-      setUserName("");
-      setEmail("");
-      setPassword("");
-      navigate("/login");
-    } catch (err) {
-      console.log(err);
-      setIsLoading(false);
-      setIsSuccess(false);
-      setIsError(true);
-    }
+  function handleRegister({ email, password, name }: UserInput) {
+    return useMutation({
+      mutationFn: () => register({ email, password, name }),
+      onSuccess: () => {
+        changeToggle(true);
+        changeText(<SuccessNotify children="Đăng kí thành công" />);
+      },
+    });
   }
 
   async function handleSignOut() {
@@ -93,14 +67,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider
       value={{
         user,
-        handleEnterUserName,
-        handleEnterEmail,
-        handleEnterPassword,
         handleRegister,
         handleLogin,
         handleSignOut,
-        isLoading,
-        isSuccess,
       }}
     >
       {children}
@@ -109,3 +78,5 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export default AuthProvider;
+
+export const useAuthUser = () => useContext<AuthProps>(AuthContext);

@@ -7,7 +7,6 @@ import supabase from "~/lib/supabase";
 import { Post } from "~/types";
 
 const RandomTopic = () => {
-  // const [topic, setTopic] = useState({});
   const getRandomTopic = async () => {
     const { data } = await supabase
       .rpc<string, PostgrestFilterBuilder<any, any, any>>("get_random_quiz")
@@ -25,7 +24,7 @@ const RandomTopic = () => {
       <div className="text-sm font-semibold">Hôm nay đọc gì?</div>
       <div>Nếu bạn buồn phiền không biết đọc gì hôm nay. Hãy để chúng tôi chọn cho bạn</div>
       <Link to={`/topic/${topic?.title}`}>
-        <button className="w-52 h-10 bg-red-500 hover:bg-red-700 text-white font-semibold rounded-lg flex justify-center items-center  gap-3">
+        <button className="w-52 h-10 bg-red-700 hover:bg-slate-100 hover:border-red-700 border-2 text-white hover:text-red-700 font-semibold rounded-lg flex justify-center items-center  gap-3">
           <GoBook size={20} /> <span className="font-semibold">Đọc truyện ngẫu nhiên</span>
         </button>
       </Link>

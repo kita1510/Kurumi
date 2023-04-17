@@ -9,7 +9,7 @@ const cssOverride: CSSProperties = {
   zIndex: 999999,
 };
 const App = ({ loading }: LoaderSizeProps) => {
-  return <MoonLoader cssOverride={cssOverride} size={30} color="#000000" loading={loading} />;
+  return <MoonLoader cssOverride={cssOverride} size={25} color="#000000" loading={loading} />;
 };
 
 export default App;

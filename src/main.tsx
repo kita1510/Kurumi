@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContext";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-import "./index.css";
-import SearchContext from "./contexts/SearchContext";
 import ToastContext from "./contexts/ToastContext";
+import "./index.css";
 
 const client = new QueryClient({
   defaultOptions: {
@@ -21,13 +19,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <QueryClientProvider client={client}>
         <ReactQueryDevtools />
-        <SearchContext>
-          <ToastContext>
-            <AuthProvider>
-              <App />
-            </AuthProvider>
-          </ToastContext>
-        </SearchContext>
+        <ToastContext>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </ToastContext>
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>,

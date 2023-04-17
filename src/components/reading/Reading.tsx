@@ -16,10 +16,6 @@ export default function Reading(
     restDelta: 0.001,
   });
 
-  console.log(moment(props?.createdAt?.toLocaleString()).format("LLL"));
-
-  const param = useParams();
-
   return (
     <>
       <motion.div

@@ -1,22 +1,19 @@
-import React, { Fragment, useContext } from "react";
-import { AuthContext, AuthProps } from "~/contexts/AuthContext";
+import { useAuthUser } from "~/contexts/AuthContext";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { BiUserCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import HomeButton from "~/components/shared/HomeButton";
 import ThreesDotLoader from "~/components/icons/ThreeDotsLoader";
+import { useState } from "react";
 
 const LoginPage = () => {
-  const {
-    user,
-    handleEnterUserName,
-    handleEnterEmail,
-    handleEnterPassword,
-    handleRegister,
-    isLoading,
-    isSuccess,
-  } = useContext<AuthProps>(AuthContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { handleRegister } = useAuthUser();
+  const register = handleRegister({ email, name, password });
+  
   return (
     <div className="flex justify-center items-center mt-20">
       <HomeButton />
@@ -30,7 +27,7 @@ const LoginPage = () => {
           </div>
           <input
             className="px-2 py-1 border-2 text-base"
-            onChange={handleEnterUserName}
+            onChange={(e) => setName(e.target.value)}
             type="text"
           />
         </div>
@@ -41,7 +38,11 @@ const LoginPage = () => {
               Email:
             </label>
           </div>
-          <input className="px-2 py-1 border-2" onChange={handleEnterEmail} type="email" />
+          <input
+            className="px-2 py-1 border-2"
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+          />
         </div>
         <div className="flex items-center justify-between gap-4 w-80">
           <div className="flex items-center gap-2">
@@ -50,16 +51,19 @@ const LoginPage = () => {
               Password:
             </label>
           </div>
-          <input className="px-2 py-1 border-2" onChange={handleEnterPassword} type="password" />
+          <input
+            className="px-2 py-1 border-2"
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+          />
         </div>
         <div>
-          {isLoading ? (
-            <ThreesDotLoader loading={isLoading} />
+          {register.isLoading ? (
+            <ThreesDotLoader loading={register.isLoading} />
           ) : (
             <button
               className="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg outline-none mx-auto "
-              onClick={handleRegister}
-              disabled={isLoading}
+              onClick={() => register.mutate()}
             >
               Register
             </button>
@@ -71,11 +75,6 @@ const LoginPage = () => {
             <b> Đăng nhập ngay</b>
           </Link>
         </div>
-        {isSuccess ? (
-          <div className="mt-5 font-semibold">Đăng kí tài khoản thành công</div>
-        ) : (
-          <div></div>
-        )}
       </div>
     </div>
   );
