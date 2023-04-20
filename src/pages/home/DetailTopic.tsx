@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { AiFillRead } from "react-icons/ai";
 import { HiHome } from "react-icons/hi";
-import { Link, Params, useLocation, useParams } from "react-router-dom";
+import { Link, Params, useParams } from "react-router-dom";
 import InteractBar from "~/components/shared/InteractBar";
 import Sidebar from "~/components/sidebar/Sidebar";
 import usePost from "~/hooks/usePost";
@@ -25,9 +25,7 @@ const DetailTopic = () => {
 
   return (
     <div className="flex w-full">
-      <div className="fixed left-0 top-0">
-        <Sidebar />
-      </div>
+      <Sidebar />
       <div className="ml-24 mt-0 px-20 py-10 flex gap-5 flex-col w-full">
         <div className="flex items-center gap-2">
           <Link to="/">

@@ -21,13 +21,11 @@ const ProfilePage = () => {
   return (
     <div>
       <div className="w-full">
-        <div className="w-[20%] h-full bg-slate-500">
-          <Sidebar />
-        </div>
+        <Sidebar />
         {status === "success" && (
           <div className="w-[80%] mt-10 ml-32 h-[200px] flex flex-row border-b-2">
             <div className=" h-20 w-[20%] rounded-full mx-20 ">
-              <img className="w-32 h-32 rounded-full object-cover" src={profile?.avatar} alt="" />
+              <img className="w-32 h-32 rounded-full object-cover" src={profile?.avatar || "https://i.pinimg.com/564x/04/39/b9/0439b94014a27f46c249717813364bb1.jpg"} alt="" />
             </div>
 
             <div className="flex flex-col gap-3">

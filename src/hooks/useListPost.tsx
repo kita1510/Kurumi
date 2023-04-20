@@ -12,8 +12,9 @@ const useListPost = () => {
   const getData = async () => {
     const { data, error } = await supabase
       .from("Post")
-      .select("*, CategoriesOnPosts(*),Category(*),PostOnLiked(*)")
-      .limit(8);
+      .select("*, CategoriesOnPosts(*),Category(*),PostOnLiked!inner(*)")
+      // .limit(8)
+      // .order("count(userId)", { ascending: false, foreignTable: "PostOnLiked" });
     return data;
   };
   const { data: posts } = useQuery<any, any, PostInfo[]>({

@@ -5,9 +5,7 @@ import Sidebar from "~/components/sidebar/Sidebar";
 const ListPage = () => {
   return (
     <div className="w-4/5">
-      <div className="fixed left-0 top-0">
-        <Sidebar />
-      </div>
+      <Sidebar />
       <div className="ml-[100px] ">
         <ReadingList />
       </div>

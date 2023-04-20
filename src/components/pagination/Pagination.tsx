@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
@@ -11,14 +12,15 @@ const Pagination = () => {
   const [isActive, setIsActive] = useState(false);
   const posts = usePosts();
 
-  const { mutate: libraryMutate } = useAddLibrary();
-  const { mutate: likeMutate } = useLikePost();
+  const queryClient  = useQueryClient()
+  const { mutateLibrary } = useAddLibrary();
+  const { likePost, unlikePost } = useLikePost();
 
   const active = "bg-red-500";
 
   return (
     <div className="flex justify-center gap-10 mt-5 flex-col w-[70%]">
-      <div className="flex gap-5 flex-wrap">
+      <div className="flex gap-8 flex-wrap">
         {posts?.map((p) => (
           <div className="flex flex-col" key={p?.id}>
             <Link to={{ pathname: `/topic/${p?.title}` }} key={p?.id}>
@@ -26,7 +28,7 @@ const Pagination = () => {
             </Link>
             <div className="flex justify-between items-center mx-3">
               <div className="flex gap-2 items-center ">
-                <AiOutlineHeart cursor={"pointer"} size={24} onClick={() => likeMutate(p)} />
+                <AiOutlineHeart cursor={"pointer"} size={24} onClick={() => likePost(p,{onSuccess: () => queryClient.invalidateQueries({queryKey: ["posts"]})})} />
                 <span className="font-semibold">{p?.PostOnLiked?.length}</span>
               </div>
               <div>
@@ -34,7 +36,7 @@ const Pagination = () => {
                   cursor={"pointer"}
                   size={24}
                   onClick={() => {
-                    libraryMutate(p);
+                    mutateLibrary(p);
                   }}
                 />
               </div>

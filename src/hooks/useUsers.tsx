@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import client from "~/configs/client";
+import supabase from "~/lib/supabase";
 import { UserInfo } from "~/types";
 
 const useUsers = () => {
-  const { data: users } = useQuery<UserInfo[]>({
+  const { data: users } = useQuery<any, any, UserInfo[]>({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await client.get("/api/users");
+      const { data } = await supabase.from("User").select("*");
       return data;
     },
   });

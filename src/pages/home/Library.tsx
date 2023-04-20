@@ -24,9 +24,7 @@ const Library = () => {
   console.log(posts?.data?.length === 0);
   return (
     <div className="flex">
-      <div className="fixed left-0 top-0">
-        <Sidebar />
-      </div>
+      <Sidebar />
       <div className="ml-44 mt-14 flex gap-5 flex-col ">
         <div className="flex items-center gap-2">
           <Link to="/">

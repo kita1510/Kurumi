@@ -27,16 +27,11 @@ export type PostLiked = {
   userId: number;
 };
 
-export type PostOnLibrary = {
-  postId: Pick<Post, "id">;
-  userId: Pick<Author, "id">;
-};
-
 const CategoryPage = () => {
   const { name } = useParams();
   const { user } = useAuthUser();
-  const { addToLibrary, mutate: libraryMutate } = useAddLibrary();
-  const { likeAPost, mutate } = useLikePost();
+  const { mutateLibrary } = useAddLibrary();
+  const { likePost, unlikePost } = useLikePost();
   const queryClient = useQueryClient();
   const { changeToggle, changeText } = useToast();
 
@@ -113,7 +108,7 @@ const CategoryPage = () => {
                       cursor={"pointer"}
                       size={24}
                       onClick={() => {
-                        mutate(l, {
+                        likePost(l, {
                           onSuccess: () => {
                             changeToggle(true);
                             changeText(
@@ -121,7 +116,6 @@ const CategoryPage = () => {
                             );
                           },
                         });
-                        // window.location.reload()
                       }}
                       // }
                     />
@@ -135,7 +129,7 @@ const CategoryPage = () => {
                   </div>
 
                   <div>
-                    <GrAddCircle cursor={"pointer"} size={24} onClick={() => libraryMutate(l)} />
+                    <GrAddCircle cursor={"pointer"} size={24} onClick={() => mutateLibrary(l)} />
                   </div>
                 </div>
               </div>

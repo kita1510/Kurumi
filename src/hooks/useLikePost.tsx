@@ -7,8 +7,15 @@ const useLikePost = () => {
   const { user } = useAuthUser();
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutate: likePost } = useMutation({
     mutationFn: likeAPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["listTopic"] });
+    },
+  });
+
+  const { mutate: unlikePost } = useMutation({
+    mutationFn: unLikeAPost,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["listTopic"] });
     },
@@ -18,7 +25,11 @@ const useLikePost = () => {
       .from("PostOnLiked")
       .insert({ postId: post?.id, userId: user?.id });
   }
-  return { likeAPost, mutate };
+
+  async function unLikeAPost(post: Post) {
+    const { data } = await supabase.from("PostOnLiked").delete().eq("postId", post?.id);
+  }
+  return { likePost, unlikePost };
 };
 
 export default useLikePost;
