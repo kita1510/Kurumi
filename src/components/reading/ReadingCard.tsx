@@ -1,5 +1,5 @@
 import React from "react";
-import Topic from "../shared/Topic";
+import Topic from "../shared/Card";
 
 const ReadingCard = () => {
   return (

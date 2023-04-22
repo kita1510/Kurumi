@@ -1,7 +1,7 @@
 import React from "react";
 import { Post } from "~/types";
 
-const Topic = ({ title, coverPage }: Pick<Post, "title" | "coverPage">) => {
+const Card = ({ title, coverPage }: Pick<Post, "title" | "coverPage">) => {
   return (
     <div className="w-[140px] min-h-[230px]  gap-2 relative rounded-sm flex flex-col cursor-pointer">
       <img
@@ -14,4 +14,4 @@ const Topic = ({ title, coverPage }: Pick<Post, "title" | "coverPage">) => {
   );
 };
 
-export default Topic;
+export default React.memo(Card);

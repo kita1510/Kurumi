@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import Sidebar from "~/components/sidebar/Sidebar";
-import { AuthContext, AuthProps } from "~/contexts/AuthContext";
+import Sidebar from "~/components/patials/Sidebar";
+import { AuthContext, AuthProps, useAuthUser } from "~/contexts/AuthContext";
 import useProfile from "~/hooks/useProfile";
 import { SlOptions } from "react-icons/sl";
 import { Link, useLocation, useParams } from "react-router-dom";
 import useUser from "~/hooks/useUser";
+import Button from "~/components/shared/Button";
+import Avatar from "~/components/shared/Avatar";
+import useFollow from "~/hooks/useFollow";
 
 const ProfilePage = () => {
-  const { user } = useContext<AuthProps>(AuthContext);
+  const { user } = useAuthUser();
 
   const param = useParams();
 
@@ -15,6 +18,7 @@ const ProfilePage = () => {
   console.log(u);
 
   const profile = useProfile(2);
+  const { mutateFollow } = useFollow();
 
   console.log(profile);
 
@@ -25,7 +29,14 @@ const ProfilePage = () => {
         {status === "success" && (
           <div className="w-[80%] mt-10 ml-32 h-[200px] flex flex-row border-b-2">
             <div className=" h-20 w-[20%] rounded-full mx-20 ">
-              <img className="w-32 h-32 rounded-full object-cover" src={profile?.avatar || "https://i.pinimg.com/564x/04/39/b9/0439b94014a27f46c249717813364bb1.jpg"} alt="" />
+              <Avatar
+                className="w-32 h-32 rounded-full object-cover"
+                src={
+                  profile?.avatar ||
+                  "https://i.pinimg.com/564x/04/39/b9/0439b94014a27f46c249717813364bb1.jpg"
+                }
+                alt=""
+              />
             </div>
 
             <div className="flex flex-col gap-3">
@@ -33,14 +44,14 @@ const ProfilePage = () => {
                 <div className="font-semibold text-2xl mr-3">{u?.name}</div>
                 {u?.id === user?.id ? (
                   <Link to={`/profile/edit/${user?.id}`}>
-                    <button className="px-5 py-2 rounded-lg font-semibold bg-slate-100">
+                    <Button className="px-5 py-2 rounded-lg font-semibold bg-slate-100">
                       Edit Profile
-                    </button>
+                    </Button>
                   </Link>
                 ) : (
-                  <button className="px-5 py-2 rounded-lg font-semibold bg-slate-100">
+                  <Button className="px-5 py-2 rounded-lg font-semibold bg-slate-100">
                     Follow
-                  </button>
+                  </Button>
                 )}
                 <SlOptions />
               </div>

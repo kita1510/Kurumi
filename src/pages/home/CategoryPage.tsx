@@ -1,12 +1,11 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
-import { HiHome } from "react-icons/hi";
 import { Link, useParams } from "react-router-dom";
-import Topic from "~/components/shared/Topic";
-import Sidebar from "~/components/sidebar/Sidebar";
-import { AuthContext, AuthProps, useAuthUser } from "~/contexts/AuthContext";
+import Topic from "~/components/shared/Card";
+import Sidebar from "~/components/patials/Sidebar";
+import { useAuthUser } from "~/contexts/AuthContext";
 import supabase from "~/lib/supabase";
 import { Author, CategoriesOnPosts, Category, Post } from "~/types";
 import "swiper/css";
@@ -15,6 +14,7 @@ import useAddLibrary from "~/hooks/useAddLibrary";
 import useLikePost from "~/hooks/useLikePost";
 import { useToast } from "~/contexts/ToastContext";
 import SuccessNotify from "~/components/icons/SuccessNotify";
+import Tree from "~/components/shared/Tree";
 
 export type CategoryOnList = Post & {
   CategoriesOnPosts: [CategoriesOnPosts];
@@ -80,16 +80,7 @@ const CategoryPage = () => {
         <Sidebar />
       </div>
       <div className="ml-44 mt-14 flex gap-5 flex-col ">
-        <div className="flex items-center gap-2">
-          <Link to="/">
-            <button className="font-semibold hover:text-red-500 flex items-center gap-2">
-              <HiHome />
-              Trang chủ /
-            </button>
-          </Link>
-          <button className="font-semibold hover:text-red-500">Thể loại</button>/
-          <button className="font-semibold hover:text-red-500">{name}</button>/
-        </div>
+        <Tree name={name}></Tree>
         <div className="text-xl font-normal uppercase">Danh sách Topic thuộc thể loại : {name}</div>
         <div className="flex gap-10 mt-5 flex-wrap">
           {listTopic?.map((l) => {

@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { AiFillRead } from "react-icons/ai";
-import { HiHome } from "react-icons/hi";
 import { Link, Params, useParams } from "react-router-dom";
+import RandomTopic from "~/components/pagination/RandomTopic";
 import InteractBar from "~/components/shared/InteractBar";
-import Sidebar from "~/components/sidebar/Sidebar";
+import Tree from "~/components/shared/Tree";
+import Sidebar from "~/components/patials/Sidebar";
 import usePost from "~/hooks/usePost";
 import { formatDate, formatYear } from "~/utils/moment";
+import Image from "~/components/shared/Image";
+import Button from "~/components/shared/Button";
 
 const DetailTopic = () => {
   const { title } = useParams<Readonly<Params<string>>>();
@@ -27,19 +30,10 @@ const DetailTopic = () => {
     <div className="flex w-full">
       <Sidebar />
       <div className="ml-24 mt-0 px-20 py-10 flex gap-5 flex-col w-full">
-        <div className="flex items-center gap-2">
-          <Link to="/">
-            <button className="font-semibold hover:text-red-500 flex items-center gap-2">
-              <HiHome />
-              Trang chủ /
-            </button>
-          </Link>
-          <button className="font-semibold hover:text-red-500">Topic</button>/
-          <button className="font-semibold hover:text-red-500">{title}</button>/
-        </div>
+        <Tree name={title} rootName={"Story"}></Tree>
         <div className="flex gap-10 mt-5 w-full h-[600px]">
           <div className="w-4/6 h-[320px] bg-slate-200 relative">
-            <img
+            <Image
               className="w-full h-full object-cover "
               src="https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg"
               alt=""
@@ -47,16 +41,16 @@ const DetailTopic = () => {
 
             <div className="absolute top-0 w-full h-full bg-opacity-80 bg-black p-5 flex gap-5">
               <div>
-                <img
+                <Image
                   className="w-40 h-52 object-cover"
                   src="https://i.pinimg.com/564x/ed/9d/61/ed9d617e86b055589629ad79147be790.jpg"
                   alt=""
                 />
                 <Link to={{ pathname: `/read/${title}` }}>
-                  <button className="w-40 h-10 bg-white flex items-center justify-center gap-7 hover:bg-slate-300 ">
+                  <Button className="w-40 h-10 bg-white text-black flex items-center justify-center gap-7 hover:bg-slate-300 ">
                     <AiFillRead size={24} />
                     <span className="font-semibold">Đọc</span>
-                  </button>
+                  </Button>
                 </Link>
               </div>
               <div className="flex flex-col gap-4">
@@ -69,11 +63,11 @@ const DetailTopic = () => {
                       <div className="flex flex-wrap gap-2 mt-2">
                         {post?.Category?.map((p) => (
                           <Link to={`/category/${p?.name}`} key={p?.id}>
-                            <button
+                            <Button
                               className={`py-1 ml-2 text-sm border-2 rounded-md px-3 bg-transparent font-semibold hover:bg-white hover:text-black`}
                             >
                               {p?.name}
-                            </button>
+                            </Button>
                           </Link>
                         ))}
                       </div>
@@ -94,7 +88,10 @@ const DetailTopic = () => {
             </div>
           </div>
         </div>
-        <InteractBar></InteractBar>
+        <InteractBar />
+        <div className="absolute right-40 top-[6.5rem]">
+          <RandomTopic />
+        </div>
       </div>
     </div>
   );

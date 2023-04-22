@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper";
+import Button from "../shared/Button";
 
 const App = memo(() => {
   const categoryList = [
@@ -77,7 +78,6 @@ const App = memo(() => {
     // padding: "0px auto"
   };
 
-
   return (
     <div className="flex gap-3 w-[250px] bg-white flex-col items-center font-monospace h-[400px]">
       <div className="font-semibold text-lg w-full text-white bg-red-800 text-center relative py-2 z-[100]">
@@ -94,12 +94,12 @@ const App = memo(() => {
           <Fragment>
             <SwiperSlide style={swiperSlideStyle}>
               <Link to={{ pathname: `/category/${c.cate}` }}>
-                <button
-                  className={`w-48 h-14 py-1 text-sm uppercase rounded-lg hover:text-white ${c.borderColor} border-2 font-semibold text-black transparent ${c.bgHoverColor}`}
+                <Button
+                  className={`w-48 h-14 py-1 text-sm uppercase rounded-lg flex justify-center items-center hover:text-white ${c.borderColor} border-2 font-semibold text-black transparent ${c.bgHoverColor}`}
                   value="Action"
                 >
                   {c.cate}
-                </button>
+                </Button>
               </Link>
             </SwiperSlide>
           </Fragment>

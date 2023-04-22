@@ -1,6 +1,7 @@
 import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { GrFormAdd } from "react-icons/gr";
+import Button from "./Button";
 
 const InteractBar = () => {
   const interactBars = [
@@ -12,12 +13,12 @@ const InteractBar = () => {
     <div className="w-full h-full">
       <div className="flex gap-5">
         {interactBars?.map((i) => (
-          <button
+          <Button
             className={`flex justify-center hover:scale-150 
           items-center border-2 border-black rounded-full w-10 h-10 ${i.hover}`}
           >
             {i.featuring}
-          </button>
+          </Button>
         ))}
       </div>
     </div>

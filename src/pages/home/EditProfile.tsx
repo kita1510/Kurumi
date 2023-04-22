@@ -1,6 +1,6 @@
 import React from "react";
 import BeatLoader from "~/components/icons/BeatLoader";
-import Sidebar from "~/components/sidebar/Sidebar";
+import Sidebar from "~/components/patials/Sidebar";
 
 const EditProfile = () => {
   return (

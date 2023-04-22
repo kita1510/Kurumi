@@ -2,14 +2,13 @@
 import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import UserActive from "../shared/UserItem";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import useGetAllUsers from "~/hooks/useUsers";
+import useUsers from "~/hooks/useUsers";
 
 export default function App() {
   const ref = useRef(null);
   const { scrollXProgress } = useScroll({ container: ref });
-  const users = useGetAllUsers();
-  // console.log(users);
+  const users = useUsers();
+  console.log(users);
 
   return (
     <>

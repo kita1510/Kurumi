@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Reading from "~/components/reading/Reading";
 import ScrollOnTop from "~/components/shared/ScrollOnTop";
-import Sidebar from "~/components/sidebar/Sidebar";
+import Sidebar from "~/components/patials/Sidebar";
 import usePost from "~/hooks/usePost";
 import supabase from "~/lib/supabase";
 import { Author } from "~/types";

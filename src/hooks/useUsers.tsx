@@ -6,7 +6,7 @@ const useUsers = () => {
   const { data: users } = useQuery<any, any, UserInfo[]>({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await supabase.from("User").select("*");
+      const { data } = await supabase.from("User").select("*,Follow(*)");
       return data;
     },
   });

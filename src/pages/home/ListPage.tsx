@@ -1,6 +1,6 @@
 import React from "react";
 import ReadingList from "~/components/reading/ReadingList";
-import Sidebar from "~/components/sidebar/Sidebar";
+import Sidebar from "~/components/patials/Sidebar";
 
 const ListPage = () => {
   return (

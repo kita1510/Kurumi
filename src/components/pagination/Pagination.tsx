@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import useAddLibrary from "~/hooks/useAddLibrary";
 import useLikePost from "~/hooks/useLikePost";
 import usePosts from "~/hooks/usePosts";
-import Topic from "../shared/Topic";
+import Topic from "../shared/Card";
 
 const Pagination = () => {
   const [isActive, setIsActive] = useState(false);
   const posts = usePosts();
 
-  const queryClient  = useQueryClient()
+  const queryClient = useQueryClient();
   const { mutateLibrary } = useAddLibrary();
   const { likePost, unlikePost } = useLikePost();
 
@@ -28,7 +28,15 @@ const Pagination = () => {
             </Link>
             <div className="flex justify-between items-center mx-3">
               <div className="flex gap-2 items-center ">
-                <AiOutlineHeart cursor={"pointer"} size={24} onClick={() => likePost(p,{onSuccess: () => queryClient.invalidateQueries({queryKey: ["posts"]})})} />
+                <AiOutlineHeart
+                  cursor={"pointer"}
+                  size={24}
+                  onClick={() =>
+                    likePost(p, {
+                      onSuccess: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+                    })
+                  }
+                />
                 <span className="font-semibold">{p?.PostOnLiked?.length}</span>
               </div>
               <div>
