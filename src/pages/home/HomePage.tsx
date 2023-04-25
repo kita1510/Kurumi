@@ -3,7 +3,7 @@ import Sidebar from "~/components/patials/Sidebar";
 import PaginationPage from "~/components/pagination/Pagination";
 import SlideActive from "~/components/sliders/SlideUserActive";
 import MainSlider from "~/components/sliders/MainSlider";
-import RandomTopic from "~/components/pagination/RandomTopic";
+import RandomTopic from "~/components/patials/RandomTopic";
 import { Link } from "react-router-dom";
 import ScrollOnTop from "~/components/shared/ScrollOnTop";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
@@ -33,9 +33,7 @@ const HomePage = () => {
           Log Out
         </Button>
       )}
-      <div className="fixed left-0 z-50">
         <Sidebar />
-      </div>
       <div className="w-9/12 ">
         <div className="mb-10">
           <SlideActive />

@@ -7,7 +7,7 @@ export type UserProfile = AuthUser & {
   Profile: Profile[];
 };
 
-const UserActive = ({ props }: { props: UserInfo }) => {
+const UserActive = ({ props }: { props: UserProfile }) => {
   return (
     <div className="flex flex-col gap-1">
       <Link to={{ pathname: `/profile/${props?.name}` }} state={props}>
@@ -15,7 +15,7 @@ const UserActive = ({ props }: { props: UserInfo }) => {
           <Avatar
             className=" h-[4.5rem] w-[4.5rem] border-4"
             src={
-              props?.profile?.avatar ||
+              props?.Profile[0]?.avatar ||
               "https://i.pinimg.com/originals/de/71/d6/de71d64ae6174176ab9cd108bf7c7c3c.jpg"
             }
             alt=""

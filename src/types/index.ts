@@ -24,8 +24,8 @@ export interface Post {
   id: number;
   title?: string;
   content?: string | null;
-  coverPage?: string | null;
-  description: string | null;
+  coverPage?: string;
+  description?: string | null;
   published: boolean;
   liked: number;
   createdAt?: Date;
@@ -72,4 +72,9 @@ export type CategoriesOnPosts = {
 export type LikedPost = {
   postId: number;
   userId: number;
+};
+
+export type Follow = {
+  userId: number;
+  profileId: number;
 };

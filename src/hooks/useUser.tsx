@@ -1,18 +1,21 @@
-import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import supabase from "~/lib/supabase";
-import { AuthUser } from "~/types";
+import { AuthUser, Follow, Profile } from "~/types";
+
+export type UserInfo = AuthUser & {
+  Profile: [Profile];
+  Follow: Follow[];
+};
 
 const useUser = (name?: string) => {
-  const client = new QueryClient();
   const ac = new AbortController();
   ac.abort();
-  const { data: u, status } = useQuery<any, any, AuthUser>({
+  const { data: u, status } = useQuery<any, any, UserInfo>({
     queryKey: ["user"],
     queryFn: async () => {
       const { data } = await supabase
         .from<"User", any>("User")
-        .select("*")
+        .select("*,Profile!inner(*)")
         .eq("name", name)
         .single();
       return data;
@@ -20,7 +23,6 @@ const useUser = (name?: string) => {
     cacheTime: 5000,
     staleTime: 1000,
   });
-  client.invalidateQueries({ queryKey: ["User"], stale: true });
   return { u, status };
 };
 

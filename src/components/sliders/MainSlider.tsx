@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper";
-import useListPost from "~/hooks/useListPost";
+import usePosts from "~/hooks/usePosts";
 import "swiper/css";
 import "swiper/css/pagination";
 import SliderCard from "../shared/SliderCard";
@@ -14,7 +14,9 @@ export default function App() {
     },
   };
 
-  const posts = useListPost();
+  const posts = usePosts();
+
+  console.log(posts)
 
   return (
     <Fragment>

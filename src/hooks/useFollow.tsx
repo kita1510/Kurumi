@@ -21,13 +21,10 @@ const useFollow = () => {
   async function handleFollow(profile: Profile) {
     const req = await supabase.from("Follow").insert({ profileId: profile?.id, userId: user?.id });
     console.log(req);
-    if (req?.data) {
+    if (req?.status) {
       changeToggle(true);
       changeText(<SuccessNotify children={"Đã thêm vào thư viện"} />);
-    } else {
-      changeToggle(true);
-      changeText(<SuccessNotify children={"Đã có trong thư viện"} />);
-    }
+    } 
   }
 
   return { mutateFollow };

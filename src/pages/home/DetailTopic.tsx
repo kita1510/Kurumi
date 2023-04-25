@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { AiFillRead } from "react-icons/ai";
 import { Link, Params, useParams } from "react-router-dom";
-import RandomTopic from "~/components/pagination/RandomTopic";
+import RandomTopic from "~/components/patials/RandomTopic";
 import InteractBar from "~/components/shared/InteractBar";
 import Tree from "~/components/shared/Tree";
 import Sidebar from "~/components/patials/Sidebar";
@@ -29,10 +29,10 @@ const DetailTopic = () => {
   return (
     <div className="flex w-full">
       <Sidebar />
-      <div className="ml-24 mt-0 px-20 py-10 flex gap-5 flex-col w-full">
+      <div className="ml-24 mt-0 px-20 pt-20 flex gap-5 flex-col w-full">
         <Tree name={title} rootName={"Story"}></Tree>
-        <div className="flex gap-10 mt-5 w-full h-[600px]">
-          <div className="w-4/6 h-[320px] bg-slate-200 relative">
+        <div className="flex gap-10 mt-5 w-full h-[800px]">
+          <div className="w-4/6 h-[380px] bg-slate-200 relative">
             <Image
               className="w-full h-full object-cover "
               src="https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg"
@@ -55,7 +55,9 @@ const DetailTopic = () => {
               </div>
               <div className="flex flex-col gap-4">
                 <div className="font-semibold text-3xl font-monospace  text-green-500">{title}</div>
-                <div className="font-normal text-sm text-white h-28">{post?.description}</div>
+                <div className="font-normal text-sm text-white  overflow-y-scroll h-96">
+                  {post?.description}
+                </div>
                 <div className=" flex w-full ">
                   <div className="font-semibold text-base text-white flex h-full gap-1 items-center w-[300px]">
                     <div className="">
@@ -80,7 +82,9 @@ const DetailTopic = () => {
                     </div>
                     <div className="font-semibold text-base text-white flex flex-col">
                       <span className="text-base">Lượt thích: </span>
-                      <span className="font-semibold text-base">{post?.PostOnLiked?.length}</span>
+                      <span className="font-semibold text-base">
+                        {post?.PostOnLiked?.length || 0}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -88,8 +92,9 @@ const DetailTopic = () => {
             </div>
           </div>
         </div>
-        <InteractBar />
-        <div className="absolute right-40 top-[6.5rem]">
+        {/* <InteractBar /> */}
+        <DetailInfo></DetailInfo>
+        <div className="absolute right-40 top-[9.5rem]">
           <RandomTopic />
         </div>
       </div>
@@ -98,3 +103,14 @@ const DetailTopic = () => {
 };
 
 export default DetailTopic;
+
+const DetailInfo = () => {
+  return <div className="w-full h-40">
+    <div>
+      <div>Thông tin truyện</div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>;
+};

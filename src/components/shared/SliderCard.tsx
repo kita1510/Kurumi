@@ -2,7 +2,8 @@ import React from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { GoCalendar } from "react-icons/go";
 import { Link } from "react-router-dom";
-import { PostInfo } from "~/hooks/usePost";
+import { PostInfo } from "~/hooks/usePosts";
+import { shortcutText } from "~/utils/formatText";
 import { formatYear } from "~/utils/moment";
 import Button from "./Button";
 import Image from "./Image";
@@ -12,7 +13,7 @@ const SliderCard = ({ props }: { props: PostInfo }) => {
     <div className="w-full h-full bg-slate-200">
       <Image
         className="w-full h-full object-cover "
-        src="https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg"
+        src={props?.coverPage ? props?.coverPage : "https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg"}
         alt=""
       />
       <div className="absolute top-0 w-full h-full bg-opacity-50 bg-black p-5 flex gap-5">
@@ -33,7 +34,7 @@ const SliderCard = ({ props }: { props: PostInfo }) => {
             </div>
           </div>
           <div className="text-sm text-white mt-3 font-medium pl-5 text-left">
-            {props?.description}
+            {shortcutText(props?.description)}
           </div>
           <div className="mt-3 pl-5 text-left flex items-center gap-3">
             <span className="text-white text-sm font-semibold">Thể loại</span>

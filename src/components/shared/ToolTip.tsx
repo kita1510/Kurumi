@@ -1,4 +1,5 @@
 import { Tooltip, TooltipProps } from "@material-tailwind/react";
+import React from "react";
 
 const App = ({ children, content, placement, className }: TooltipProps) => {
   return (
@@ -19,4 +20,4 @@ const App = ({ children, content, placement, className }: TooltipProps) => {
   );
 };
 
-export default App;
+export default React.memo(App);

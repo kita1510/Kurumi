@@ -24,7 +24,7 @@ export default function App() {
         />
       </svg> */}
       <div
-        className="flex w-[80%] overflow-x-scroll flex-shrink-0 flex-grow-0 basis-[600px] mx-0 my-auto list-none py-5 gap-5  px-5"
+        className="flex w-[70%] overflow-x-scroll flex-shrink-0 flex-grow-0 basis-[300px] mx-0 my-auto list-none py-5 gap-5  px-5"
         ref={ref}
       >
         {users?.map((p) => {

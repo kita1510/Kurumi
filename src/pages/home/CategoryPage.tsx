@@ -76,11 +76,9 @@ const CategoryPage = () => {
 
   return (
     <div className="flex ">
-      <div className="fixed left-0 top-0">
-        <Sidebar />
-      </div>
+      <Sidebar />
       <div className="ml-44 mt-14 flex gap-5 flex-col ">
-        <Tree name={name}></Tree>
+        <Tree name={name} rootName={"Thể loại"} className="px-0"></Tree>
         <div className="text-xl font-normal uppercase">Danh sách Topic thuộc thể loại : {name}</div>
         <div className="flex gap-10 mt-5 flex-wrap">
           {listTopic?.map((l) => {

@@ -1,26 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import Sidebar from "~/components/patials/Sidebar";
 import { AuthContext, AuthProps, useAuthUser } from "~/contexts/AuthContext";
-import useProfile from "~/hooks/useProfile";
-import { SlOptions } from "react-icons/sl";
 import { Link, useLocation, useParams } from "react-router-dom";
 import useUser from "~/hooks/useUser";
 import Button from "~/components/shared/Button";
 import Avatar from "~/components/shared/Avatar";
 import useFollow from "~/hooks/useFollow";
+import {SlOptions} from "react-icons/sl"
 
 const ProfilePage = () => {
   const { user } = useAuthUser();
-
   const param = useParams();
-
   const { u, status } = useUser(param?.id);
   console.log(u);
-
-  const profile = useProfile(2);
   const { mutateFollow } = useFollow();
-
-  console.log(profile);
 
   return (
     <div>
@@ -32,7 +25,7 @@ const ProfilePage = () => {
               <Avatar
                 className="w-32 h-32 rounded-full object-cover"
                 src={
-                  profile?.avatar ||
+                  u?.Profile[0]?.avatar ||
                   "https://i.pinimg.com/564x/04/39/b9/0439b94014a27f46c249717813364bb1.jpg"
                 }
                 alt=""
@@ -60,14 +53,14 @@ const ProfilePage = () => {
                   <span className="font-semibold">0 </span> posts
                 </div>
                 <div className="font-normal">
-                  <span className="font-semibold"></span> follower
+                  <span className="font-semibold">{u?.Follow?.length}</span> follower
                 </div>
                 <div className="font-normal">
                   <span className="font-semibold">6 </span> following
                 </div>
               </div>
 
-              <div className="flex items-center gap-6 mt-2 font-semibold">{profile?.bio}</div>
+              <div className="flex items-center gap-6 mt-2 font-semibold">{u?.Profile[0]?.bio}</div>
             </div>
           </div>
         )}

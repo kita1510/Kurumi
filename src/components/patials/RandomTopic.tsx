@@ -10,7 +10,7 @@ import Button from "../shared/Button";
 const RandomTopic = () => {
   const getRandomTopic = async () => {
     const { data } = await supabase
-      .rpc<string, PostgrestFilterBuilder<any, any, any>>("get_random_quiz")
+      .rpc<string, PostgrestFilterBuilder<any, any, any>>("get_random_post")
       .single();
     return data;
   };

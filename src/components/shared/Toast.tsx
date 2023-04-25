@@ -1,5 +1,6 @@
 /** @format */
 
+import React from "react";
 import { ReactElement, useEffect } from "react";
 import { GrFormClose } from "react-icons/gr";
 import { useToast } from "../../contexts/ToastContext";
@@ -36,4 +37,4 @@ function ToastMessage({ text, time }: ToastMessProps) {
   );
 }
 
-export default ToastMessage;
+export default React.memo(ToastMessage);

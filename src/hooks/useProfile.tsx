@@ -1,9 +1,10 @@
 import { PostgrestQueryBuilder } from "@supabase/postgrest-js";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import supabase from "~/lib/supabase";
 import { Profile } from "~/types";
 
 const useProfile = (userId?: number, name?: string) => {
+  const queryClient = new QueryClient();
   const { data: userProfile } = useQuery<any, any, Profile>({
     queryKey: ["profile"],
     queryFn: async () => {
@@ -12,6 +13,9 @@ const useProfile = (userId?: number, name?: string) => {
         .select("*")
         .eq("userId", userId)
         .single();
+      if (profile?.status === 1) {
+        queryClient.invalidateQueries({ queryKey: ["Profile"] });
+      }
       return profile?.data;
     },
   });

@@ -65,9 +65,9 @@ const LoginPage = () => {
           )}
         </div>
         <div>
-          Chưa có tài khoản.
-          <Link to="/register">
-            <b> Đăng kí ngay</b>
+          Nếu đã có tài khoản.
+          <Link to="/login">
+            <b> Đăng nhập ngay</b>
           </Link>
         </div>
       </div>

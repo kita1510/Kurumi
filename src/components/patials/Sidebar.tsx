@@ -8,6 +8,7 @@ import ToolTipComponent from "../shared/ToolTip";
 import SearchTab from "../SearchTab";
 import Button from "../shared/Button";
 import Avatar from "../shared/Avatar";
+import CircleButton from "../shared/CircleButton";
 
 const Sidebar = () => {
   const { user } = useContext<AuthProps>(AuthContext);
@@ -72,16 +73,16 @@ const Sidebar = () => {
                 <ToolTipComponent content={n.content} placement={"right"} key={n.id}>
                   <NavLink to={{ pathname: n.link }}>
                     {({ isActive }) => (
-                      <Button
+                      <CircleButton
                         onClick={n.handleClick}
                         className={`${
                           !isTab && isActive ? "bg-slate-100 border-2 border-black" : ""
-                        } w-14 h-14 hover:bg-slate-100 rounded-full flex justify-center text-black items-center 
+                        } w-14 h-14 hover:bg-slate-100  text-black 
                          ${isTab ? n.styleActive : n.style}
                         `}
                       >
                         {!isTab && isActive ? n.activeIcon : n.icon}
-                      </Button>
+                      </CircleButton>
                     )}
                   </NavLink>
                 </ToolTipComponent>
@@ -103,12 +104,10 @@ const Sidebar = () => {
             </Link>
           )}
         </div>
-        <div className="z-[100]">
-          {isTab ? <SearchTab></SearchTab> : <React.Fragment></React.Fragment>}
-        </div>
+        <div className="z-[100]">{isTab ? <SearchTab /> : <React.Fragment></React.Fragment>}</div>
       </div>
     </div>
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);
