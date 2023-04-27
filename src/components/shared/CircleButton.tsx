@@ -2,7 +2,9 @@ import React from "react";
 import BaseButton, { BaseButtonProps } from "./BaseButton";
 import classNames from "classnames";
 
-export interface CircleButtonProps extends BaseButtonProps {}
+export interface CircleButtonProps extends BaseButtonProps {
+  secondar?: boolean;
+}
 
 const CircleButton = React.forwardRef<HTMLButtonElement, CircleButtonProps>((props, ref) => {
   const { className, children, ...rest } = props;

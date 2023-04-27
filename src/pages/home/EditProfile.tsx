@@ -24,7 +24,7 @@ const EditProfile = () => {
       .from("Profile")
       .update("bio", bio)
       .eq("userId", u?.Profile[0]?.userId);
-      console.log(req)
+    console.log(req);
   }
 
   const { mutate, isLoading } = useMutation({ mutationFn: updateBio });

@@ -16,7 +16,7 @@ export default function App() {
 
   const posts = usePosts();
 
-  console.log(posts)
+  console.log(posts);
 
   return (
     <Fragment>

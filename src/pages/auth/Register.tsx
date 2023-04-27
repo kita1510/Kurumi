@@ -29,7 +29,7 @@ const LoginPage = () => {
             className="px-3 py-1 flex text-black"
             label="Name"
             ref={name}
-            LeftIcon={<BiUserCircle />}
+            LeftIcon={BiUserCircle}
             placeholder="name"
           />
         </div>
@@ -38,7 +38,7 @@ const LoginPage = () => {
             className="px-3 py-1 flex text-black"
             label="Email"
             ref={email}
-            LeftIcon={<HiOutlineMail />}
+            LeftIcon={HiOutlineMail}
             placeholder="email"
           />
         </div>
@@ -47,7 +47,7 @@ const LoginPage = () => {
             className="px-3 py-1 flex flex-col"
             label="Password"
             ref={password}
-            LeftIcon={<RiLockPasswordLine />}
+            LeftIcon={RiLockPasswordLine}
             type={"password"}
             placeholder="password"
           />

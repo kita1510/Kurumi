@@ -26,7 +26,7 @@ const Library = () => {
     <div className="flex">
       <Sidebar />
       <div className="ml-44 mt-14 flex gap-5 flex-col ">
-        <Tree rootName="Thư viện"/>
+        <Tree rootName="Thư viện" />
         <div>
           <div className="text-xl font-normal uppercase">Thư viện của bạn</div>
           {posts?.data?.length === 0 && (

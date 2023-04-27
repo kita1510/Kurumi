@@ -13,7 +13,11 @@ const SliderCard = ({ props }: { props: PostInfo }) => {
     <div className="w-full h-full bg-slate-200">
       <Image
         className="w-full h-full object-cover "
-        src={props?.coverPage ? props?.coverPage : "https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg"}
+        src={
+          props?.coverPage
+            ? props?.coverPage
+            : "https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg"
+        }
         alt=""
       />
       <div className="absolute top-0 w-full h-full bg-opacity-50 bg-black p-5 flex gap-5">

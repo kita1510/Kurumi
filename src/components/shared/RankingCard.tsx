@@ -1,7 +1,7 @@
 import React from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { PostInfo } from "~/hooks/useListPost";
+import { PostInfo } from "~/hooks/usePost";
 import Image from "./Image";
 
 const RankingCard = ({ props, index }: { props: PostInfo; index: number }) => {

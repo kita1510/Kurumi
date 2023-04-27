@@ -20,7 +20,7 @@ function ToastMessage({ text, time }: ToastMessProps) {
     return () => {
       clearInterval(idTimeOut);
     };
-  }, [toggle]);
+  }, [changeToggle, time, toggle]);
 
   return (
     <div>

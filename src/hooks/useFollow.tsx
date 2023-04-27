@@ -24,7 +24,7 @@ const useFollow = () => {
     if (req?.status) {
       changeToggle(true);
       changeText(<SuccessNotify children={"Đã thêm vào thư viện"} />);
-    } 
+    }
   }
 
   return { mutateFollow };

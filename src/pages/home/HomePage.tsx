@@ -33,7 +33,7 @@ const HomePage = () => {
           Log Out
         </Button>
       )}
-        <Sidebar />
+      <Sidebar />
       <div className="w-9/12 ">
         <div className="mb-10">
           <SlideActive />

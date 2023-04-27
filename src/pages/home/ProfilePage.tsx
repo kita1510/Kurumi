@@ -6,7 +6,7 @@ import useUser from "~/hooks/useUser";
 import Button from "~/components/shared/Button";
 import Avatar from "~/components/shared/Avatar";
 import useFollow from "~/hooks/useFollow";
-import {SlOptions} from "react-icons/sl"
+import { SlOptions } from "react-icons/sl";
 
 const ProfilePage = () => {
   const { user } = useAuthUser();

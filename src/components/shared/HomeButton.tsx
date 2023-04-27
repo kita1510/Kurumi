@@ -16,4 +16,4 @@ const HomeButton = () => {
   );
 };
 
-export default HomeButton;
+export default React.memo(HomeButton);

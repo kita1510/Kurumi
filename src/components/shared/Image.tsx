@@ -19,10 +19,15 @@ interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
   isCircle?: boolean;
 }
 
-const Image: React.FC<ImageProps> = ({ src, alt, className,isCircle, ...props }) => {
+const Image: React.FC<ImageProps> = ({ src, alt, className, isCircle, ...props }) => {
   return (
     <motion.div variants={variants} className={className}>
-      <img src={src} alt={alt} className={classNames("w-full h-full object-cover", isCircle ? "rounded-full" : "")} {...props} />
+      <img
+        src={src}
+        alt={alt}
+        className={classNames("w-full h-full object-cover", isCircle ? "rounded-full" : "")}
+        {...props}
+      />
     </motion.div>
   );
 };

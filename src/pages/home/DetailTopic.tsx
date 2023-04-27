@@ -105,12 +105,14 @@ const DetailTopic = () => {
 export default DetailTopic;
 
 const DetailInfo = () => {
-  return <div className="w-full h-40">
-    <div>
-      <div>Thông tin truyện</div>
-      <div></div>
-      <div></div>
-      <div></div>
+  return (
+    <div className="w-full h-40">
+      <div>
+        <div>Thông tin truyện</div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
-  </div>;
+  );
 };

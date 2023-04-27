@@ -9,8 +9,8 @@ export interface InputProps extends React.HTMLProps<HTMLInputElement> {
   containerClassName?: string;
   containerInputClassName?: string;
   labelClassName?: string;
-  LeftIcon?: React.ReactNode;
-  RightIcon?: React.ReactNode;
+  LeftIcon?: React.ComponentType<Icon>;
+  RightIcon?: React.ComponentType<Icon>;
   label?: string;
 }
 
@@ -23,7 +23,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     LeftIcon,
     RightIcon,
     className,
-    onChange,
     ...inputProps
   } = props;
 
@@ -38,7 +37,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           containerInputClassName,
         )}
       >
-        {LeftIcon && LeftIcon}
+        {LeftIcon && <LeftIcon />}
 
         <input
           ref={ref}
@@ -49,7 +48,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           {...inputProps}
         />
 
-        {RightIcon && RightIcon}
+        {RightIcon && <RightIcon />}
       </div>
     </div>
   );
