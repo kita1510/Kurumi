@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { AiFillRead } from "react-icons/ai";
 import { Link, Params, useParams } from "react-router-dom";
 import RandomTopic from "~/components/patials/RandomTopic";
-import InteractBar from "~/components/shared/InteractBar";
 import Tree from "~/components/shared/Tree";
 import Sidebar from "~/components/patials/Sidebar";
 import usePost from "~/hooks/usePost";
@@ -23,7 +22,6 @@ const DetailTopic = () => {
 
   useEffect(() => {
     handleMoveToTop();
-    return () => {};
   }, []);
 
   return (
@@ -35,7 +33,10 @@ const DetailTopic = () => {
           <div className="w-4/6 h-[380px] bg-slate-200 relative">
             <Image
               className="w-full h-full object-cover "
-              src="https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg"
+              src={
+                post?.coverPage ||
+                "https://i.pinimg.com/564x/e2/94/c6/e294c6593beacbefaf667b305eba196f.jpg"
+              }
               alt=""
             />
 

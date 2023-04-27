@@ -6,11 +6,12 @@ import Tree from "~/components/shared/Tree";
 import Sidebar from "~/components/patials/Sidebar";
 import { AuthContext, AuthProps } from "~/contexts/AuthContext";
 import supabase from "~/lib/supabase";
+import { PostInfo } from "~/hooks/usePosts";
 
 const Library = () => {
   const { user } = useContext<AuthProps>(AuthContext);
 
-  const posts = useQuery({
+  const posts = useQuery<any, any, PostInfo[]>({
     queryKey: ["postOnLibrary"],
     queryFn: async () => {
       const res = await supabase
@@ -42,7 +43,7 @@ const Library = () => {
           )}
           <div className="flex gap-10 mt-5 flex-wrap">
             {posts?.data?.map((l) => (
-              <div>
+              <div key={l?.id}>
                 <Link to={`/topic/${l?.title}`}>
                   <Card key={l?.categoryId} title={l?.title} coverPage={l?.coverPage} />
                 </Link>

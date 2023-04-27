@@ -14,7 +14,7 @@ export default function App() {
     },
   };
 
-  const posts = usePosts();
+  const { posts } = usePosts();
 
   console.log(posts);
 

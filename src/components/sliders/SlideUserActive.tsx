@@ -3,11 +3,12 @@ import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import UserActive from "../shared/UserItem";
 import useUsers from "~/hooks/useUsers";
+import UserListSkeleton from "../skeletons/UserListSkeleton";
 
 export default function App() {
   const ref = useRef(null);
   const { scrollXProgress } = useScroll({ container: ref });
-  const users = useUsers();
+  const { users, isLoading } = useUsers();
   console.log(users);
 
   return (
@@ -28,7 +29,9 @@ export default function App() {
         ref={ref}
       >
         {users?.map((p) => {
-          return (
+          return isLoading ? (
+            <UserListSkeleton />
+          ) : (
             <div key={p?.id}>
               <UserActive props={p} />
             </div>

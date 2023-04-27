@@ -91,7 +91,7 @@ const App = memo(() => {
         style={swiperStyle}
       >
         {categoryList.map((c) => (
-          <Fragment>
+          <Fragment key={c?.cate}>
             <SwiperSlide style={swiperSlideStyle}>
               <Link to={{ pathname: `/category/${c.cate}` }}>
                 <Button
@@ -108,5 +108,6 @@ const App = memo(() => {
     </div>
   );
 });
+App.displayName = "Category";
 
 export default App;

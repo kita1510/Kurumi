@@ -11,7 +11,7 @@ export type PostInfo = Post & {
 };
 
 const usePosts = () => {
-  const { data: posts } = useQuery<any, any, [PostInfo]>({
+  const { data: posts, isLoading } = useQuery<any, any, [PostInfo]>({
     queryKey: ["posts"],
     queryFn: async () => {
       const { data, status } = await supabase
@@ -21,7 +21,7 @@ const usePosts = () => {
     },
   });
 
-  return posts;
+  return {posts, isLoading};
 };
 
 export default usePosts;

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";

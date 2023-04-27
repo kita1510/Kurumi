@@ -83,7 +83,7 @@ const CategoryPage = () => {
         <div className="flex gap-10 mt-5 flex-wrap">
           {listTopic?.map((l) => {
             return (
-              <div>
+              <div key={l?.id}>
                 <Link to={{ pathname: `/topic/${l?.title}` }} state={l}>
                   <Topic key={l?.id} title={l?.title} coverPage={l?.coverPage} />
                 </Link>
@@ -100,9 +100,7 @@ const CategoryPage = () => {
                         likePost(l, {
                           onSuccess: () => {
                             changeToggle(true);
-                            changeText(
-                              <SuccessNotify children="Đã thích bài viết"></SuccessNotify>,
-                            );
+                            changeText(<SuccessNotify text="Đã thích bài viết"></SuccessNotify>);
                           },
                         });
                       }}
