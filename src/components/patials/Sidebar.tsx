@@ -39,7 +39,7 @@ const Sidebar = () => {
       activeIcon: <BiSearchAlt size={30} color={"black"} />,
       style: "border-none bg-transparent",
       styleActive: "border-black border-2",
-      handleClick: () => setIsTab(!isTab),
+      // handleClick: () => setIsTab(!isTab),
     },
     {
       id: 5,
@@ -74,7 +74,7 @@ const Sidebar = () => {
                   <NavLink to={{ pathname: n.link }}>
                     {({ isActive }) => (
                       <CircleButton
-                        onClick={n.handleClick}
+                        // onClick={n.handleClick}
                         className={`${
                           !isTab && isActive ? "bg-slate-100 border-2 border-black" : ""
                         } w-14 h-14 hover:bg-slate-100  text-black 
